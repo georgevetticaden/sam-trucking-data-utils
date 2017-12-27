@@ -3,10 +3,315 @@
   	<modelVersion>4.0.0</modelVersion>
   	<groupId>hortonworks.hdf.sam.refapp</groupId>
   	<artifactId>sam-trucking-data-utils</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
+  	<version>0.4.0.3.1.0.0-412</version>
+  	
+  	
+	<properties>
+		<schema.registry.version>0.4.0.3.1.0.0-412</schema.registry.version>
+		<kite.version>1.0.0</kite.version>
+       <jersey.version>2.22.1</jersey.version>
+        <jersey-media-multipart.version>2.22.1</jersey-media-multipart.version>	
+        <guava.version>18.0</guava.version>	
+        <jackson.version>2.7.3</jackson.version>
+        <aws.kinesis.version>1.8.7</aws.kinesis.version>
+        <junit.version>4.5</junit.version>
+        <log4j2.version>2.6.2</log4j2.version>
+        <kafka.version>0.10.0.2.5.0.0-1245</kafka.version>
+		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
+		<org.springframework.spring.context.support>3.2.5.RELEASE</org.springframework.spring.context.support>	        
+	</properties>
+	
+	
+	<dependencies>
+		
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.7.21</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-slf4j-impl</artifactId>
+		    <version>2.6.2</version>
+		   <!--  <scope>provided</scope>  Needed for standalone invocation of simulator as assembly -->
+		</dependency>		
+		
+		<dependency>
+	    	<groupId>org.apache.logging.log4j</groupId>
+	        <artifactId>log4j-core</artifactId>
+	        <version>${log4j2.version}</version>  
+	      	<!--  <scope>provided</scope>  Needed for standalone invocation of simulator as assembly -->                 	
+		</dependency>   
+		
+		       	
+            				
+		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-actor_2.10</artifactId>
+			<version>2.3-M1</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<version>5.7.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+    				<artifactId>commons-logging</artifactId>
+				</exclusion>			
+			</exclusions>				
+		</dependency>
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.4</version>
+		</dependency>		
+		
+		<!-- Kafka dependencies -->
+		
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.10</artifactId>
+			<version>${kafka.version}</version>		
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+    				<artifactId>log4j</artifactId>
+				</exclusion>	
+                <exclusion>
+                	<groupId>org.slf4j</groupId>
+                	<artifactId>slf4j-log4j12</artifactId>
+                </exclusion>						
+			</exclusions>	
+		</dependency>
+    	
+    	<dependency>        
+    		<groupId>org.scala-lang</groupId>        
+    		<artifactId>scala-library</artifactId>        
+    		<version>2.10.2</version>    
+    	</dependency>  
+
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-reflect</artifactId>
+			<version>2.10.2</version>
+		</dependency>
+
+		<!-- 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.5</version>
+		</dependency>			
+		 -->			    	
+			    	
+		<dependency>        
+			<groupId>com.yammer.metrics</groupId>        
+			<artifactId>metrics-core</artifactId>        
+			<version>2.2.0</version>    
+		</dependency>  
+		
+    	<dependency>
+      		<groupId>org.slf4j</groupId>
+      		<artifactId>slf4j-api</artifactId>
+      		<version>1.6.1</version>
+    	</dependency>		
+    	
+    	<dependency>        
+    		<groupId>com.101tec</groupId>        
+    		<artifactId>zkclient</artifactId>        
+    		<version>0.3</version>  
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+    				<artifactId>log4j</artifactId>
+				</exclusion>			
+			</exclusions>	    		  
+    	</dependency>  		
+    	
+    	<dependency>
+  			<groupId>commons-io</groupId>
+  			<version>2.5</version>    	    	
+  			<artifactId>commons-io</artifactId>
+    	</dependency>
+    	
+    	
+    	
+		
+		<!-- Need this commnted out due to conflicting jar hell 
+        <dependency>
+            <groupId>org.kitesdk</groupId>
+            <artifactId>kite-hadoop-test-dependencies</artifactId>
+            <type>pom</type>
+            <scope>test</scope>
+            <version>${kite.version}</version>
+        </dependency>
+
+       
+
+         <dependency>
+         	<groupId>org.apache.nifi</groupId>
+            	<artifactId>nifi-kite-processors</artifactId>
+                <version>1.0.0</version>
+         
+         </dependency>   
+          --> 	
+    	
+    	<!-- Libraries for Schema Registry -->
+		<dependency>
+	            <groupId>com.hortonworks.registries</groupId>
+	            <artifactId>schema-registry-client</artifactId>
+	            <version>${schema.registry.version}</version>	
+		</dependency>
+		<dependency>
+	            <groupId>com.hortonworks.registries</groupId>
+	            <artifactId>schema-registry-common</artifactId>
+	            <version>${schema.registry.version}</version>	
+		</dependency>		
+		<dependency>
+	            <groupId>com.hortonworks.registries</groupId>
+	            <artifactId>schema-registry-serdes</artifactId>
+	            <version>${schema.registry.version}</version>	
+		</dependency>	
+		<dependency>
+	            <groupId>com.hortonworks.registries</groupId>
+	            <artifactId>registry-common</artifactId>
+	            <version>${schema.registry.version}</version>	
+		</dependency>			
+		
+		
+		
+		
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${jersey-media-multipart.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>	
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-json-jackson</artifactId>
+                <version>${jersey.version}</version>
+                <exclusions>
+                	<exclusion>
+                		<groupId>com.fasterxml.jackson.jaxrs</groupId>
+                		<artifactId>jackson-jaxrs-base</artifactId>
+                	</exclusion>
+                </exclusions>
+                                
+        </dependency>        
+        
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-protobuf</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>        
+        
+	       <dependency>
+	                <groupId>com.google.guava</groupId>
+	                <artifactId>guava</artifactId>
+	                <version>${guava.version}</version>
+	       </dependency>        
+	
+			 <!-- Spring -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${org.springframework.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+	    				<artifactId>commons-logging</artifactId>
+					</exclusion>			
+				</exclusions>				
+			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>	
+			
+			<!-- Spring -->		
+	
+		<dependency>
+		    <groupId>org.apache.avro</groupId>
+		    <artifactId>avro</artifactId>
+		    <version>1.7.7</version>
+		</dependency>		
+		<dependency>
+		    <groupId>org.xerial.snappy</groupId>
+		    <artifactId>snappy-java</artifactId>
+		    <version>1.0.5</version>
+		</dependency>
+
+
+       
+        
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>      	
+		
+		
+		
+		<!-- Kinesis Libraries -->
+ 		<dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>amazon-kinesis-client</artifactId>
+            <version>${aws.kinesis.version}</version>
+        </dependency>		
+
+	</dependencies>	
   
   
 	<build>
+		<finalName>stream-simulator</finalName>
         <plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -17,14 +322,52 @@
 				</configuration>
 			</plugin>
 			        
-         
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-            </plugin>
+	    <plugin>
+	      <artifactId>maven-assembly-plugin</artifactId>
+	      <version>2.6</version>
+	      <configuration>
+	
+	        <descriptorRefs>
+	          <descriptorRef>jar-with-dependencies</descriptorRef>
+	        </descriptorRefs>
+	      </configuration>
+	    </plugin>	
             
 		        
         </plugins>
     </build>      
+    
+	<repositories>
+		<repository>
+			<id>github-releases</id>
+			<url>http://oss.sonatype.org/content/repositories/github-releases/</url>
+		</repository>
+		<repository>
+			<id>clojars.org</id>
+			<url>http://clojars.org/repo</url>
+		</repository>
+        <repository>
+            <id>hortonworks</id>
+            <url>http://repo.hortonworks.com/content/repositories/releases/</url>
+        </repository>	
+       <!-- Need to add the followign public repo because of jetty 6.1.26.hwx compilation error -->		
+		<repository>
+			<id>hortonworks-public</id>
+			<name>Hortonworks Public</name>
+			<url>http://repo.hortonworks.com/content/groups/public/</url>
+		</repository>      
+		
+		<repository>
+            <id>hortonworks.repo</id>
+            <url>http://nexus-private.hortonworks.com/nexus/content/groups/public/</url>
+            <name>Hortonworks Repo</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>		
+           	
+	</repositories>    
 </project>
