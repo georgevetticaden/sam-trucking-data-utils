@@ -3,11 +3,11 @@
   	<modelVersion>4.0.0</modelVersion>
   	<groupId>hortonworks.hdf.sam.refapp</groupId>
   	<artifactId>sam-trucking-data-utils</artifactId>
-  	<version>0.4.0.3.1.0.0-412</version>
+  	<version>0.4.0.3.1.0.0-420</version>
   	
   	
 	<properties>
-		<schema.registry.version>0.4.0.3.1.0.0-412</schema.registry.version>
+		<schema.registry.version>0.4.0.3.1.0.0-420</schema.registry.version>
 		<kite.version>1.0.0</kite.version>
        <jersey.version>2.22.1</jersey.version>
         <jersey-media-multipart.version>2.22.1</jersey-media-multipart.version>	
