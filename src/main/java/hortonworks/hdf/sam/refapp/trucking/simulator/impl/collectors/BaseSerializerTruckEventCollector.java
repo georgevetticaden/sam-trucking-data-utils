@@ -95,7 +95,8 @@ public abstract class BaseSerializerTruckEventCollector extends BaseTruckEventCo
     	Schema schema = new Schema.Parser().parse(getSchema(schemaFileName));
         
         GenericRecord avroRecord = new GenericData.Record(schema);
-        String eventTime = new Timestamp(new Date().getTime()).toString();
+        long eventTimeLong = new Date().getTime();
+        String eventTime = new Timestamp(eventTimeLong).toString();
         int truckId = event.getTruck().getTruckId();
         int driverId = event.getTruck().getDriver().getDriverId();
         int routeId = event.getTruck().getDriver().getRoute().getRouteId();
@@ -105,6 +106,7 @@ public abstract class BaseSerializerTruckEventCollector extends BaseTruckEventCo
         
         
         avroRecord.put("eventTime", eventTime);
+        avroRecord.put("eventTimeLong", eventTimeLong);
         avroRecord.put("eventSource", "truck_geo_event");
         avroRecord.put("truckId", truckId);
         avroRecord.put("driverId", driverId);
@@ -127,7 +129,11 @@ public abstract class BaseSerializerTruckEventCollector extends BaseTruckEventCo
     	Schema schema = new Schema.Parser().parse(getSchema(schemaFileName));
         
         GenericRecord avroRecord = new GenericData.Record(schema);
-        avroRecord.put("eventTime", new Timestamp(new Date().getTime()).toString());
+        long eventTimeLong = new Date().getTime();
+        String eventTime = new Timestamp(eventTimeLong).toString();
+        
+        avroRecord.put("eventTime", eventTime);
+        avroRecord.put("eventTimeLong", eventTimeLong);
         avroRecord.put("eventSource", "truck_speed_event");
         avroRecord.put("truckId", event.getTruck().getTruckId());
         avroRecord.put("driverId", event.getTruck().getDriver().getDriverId());
