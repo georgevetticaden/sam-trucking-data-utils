@@ -14,6 +14,10 @@ import com.amazonaws.services.kinesis.AmazonKinesisClientBuilder;
 import com.amazonaws.services.kinesis.model.DescribeStreamResult;
 import com.amazonaws.services.kinesis.model.PutRecordRequest;
 import com.amazonaws.services.kinesis.model.ResourceNotFoundException;
+import com.hortonworks.registries.schemaregistry.SchemaCompatibility;
+import com.hortonworks.registries.schemaregistry.SchemaMetadata;
+import com.hortonworks.registries.schemaregistry.avro.AvroSchemaProvider;
+import com.hortonworks.registries.schemaregistry.serdes.avro.AvroSnapshotSerializer;
 
 
 public class KinesisEventSerializedInternalWithRegistryEnrichedTopicsCollector extends BaseSerializerTruckEventCollector {
@@ -122,5 +126,49 @@ public class KinesisEventSerializedInternalWithRegistryEnrichedTopicsCollector e
 	
 
 	}
+	
+	@Override
+	public byte[] serializeTruckGeoEvent(MobileEyeEvent event) throws Exception  {
+		
+		//get serializer info from registry
+		AvroSnapshotSerializer serializer = createSerializer();		
+				
+		Object truckGeoEvent = createGenericRecordForTruckGeoEvent("/schema/truck-geo-event-kafka.avsc", event);
+		
+	
+       // Now we have the payload in right format (Avro GenericRecord), lets serialize
+       SchemaMetadata schemaMetadata = new SchemaMetadata.Builder(TruckSchemaConfig.KAFKA_TRUCK_GEO_EVENT_TOPIC_NAME)
+		  .type(AvroSchemaProvider.TYPE)
+		  .schemaGroup(TruckSchemaConfig.LOG_SCHEMA_GROUP_NAME)
+		  .description("Truck Geo Events from trucks")
+		  .compatibility(SchemaCompatibility.BACKWARD)
+		  .build();       
+		byte[] serializedPaylod = serializer.serialize(truckGeoEvent, schemaMetadata);
+
+		return serializedPaylod;
+		
+	}	
+	
+	@Override
+	public byte[] serializeTruckSpeedEvent(MobileEyeEvent event) throws Exception  {
+		
+		//get serializer info from registry
+		AvroSnapshotSerializer serializer = createSerializer();		
+				
+		Object truckGeoEvent = createGenericRecordForTruckSpeedEvent("/schema/truck-speed-event-kafka.avsc", event);
+
+	
+       // Now we have the payload in right format (Avro GenericRecord), lets serialize
+       SchemaMetadata schemaMetadata = new SchemaMetadata.Builder(TruckSchemaConfig.KAFKA_TRUCK_SPEED_EVENT_TOPIC_NAME)
+		  .type(AvroSchemaProvider.TYPE)
+		  .schemaGroup(TruckSchemaConfig.LOG_SCHEMA_GROUP_NAME)
+		  .description("Truck Speed Events from trucks")
+		  .compatibility(SchemaCompatibility.BACKWARD)
+		  .build();       
+		byte[] serializedPaylod = serializer.serialize(truckGeoEvent, schemaMetadata);
+
+		return serializedPaylod;
+		
+	}		
 
 }

@@ -72,7 +72,7 @@ public abstract class BaseSerializerTruckEventCollector extends BaseTruckEventCo
 		
 	}	
 
-	private AvroSnapshotSerializer createSerializer() {
+	protected AvroSnapshotSerializer createSerializer() {
 		AvroSnapshotSerializer serializer = new AvroSnapshotSerializer();		
 		serializer.init(createConfig(this.schemaRegistryUrl));
 		return serializer;
