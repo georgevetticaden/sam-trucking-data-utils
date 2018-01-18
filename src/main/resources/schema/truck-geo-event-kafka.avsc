@@ -4,7 +4,7 @@
    "name" : "truckgeoeventkafka",
    "fields" : [
       { "name" : "eventTime" , "type" : "string" },
-      { "name" : "eventTimeLong" , "type" : "long" },
+      { "name" : "eventTimeLong" , "type" : "long", "default": 0 },
       { "name" : "eventSource" , "type" : "string" },
       { "name" : "truckId" , "type" : "int" },
       { "name" : "driverId" , "type" : "int"},
