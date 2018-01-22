@@ -42,6 +42,9 @@ public  final class TruckSchemaConfig {
 	public static final String KAFKA_RAW_TRUCK_GEO_EVENT_TOPIC_NAME = "raw-truck_events_avro";
 	// This topic is a single kafka topic for both speed and geo events
 	public static final String KAFKA_RAW_TRUCK_EVENT_TOPIC_NAME = "raw-all_truck_events_avro";
+	// This topic is a single kafka for csv eventsfor both speed and geo events that has schema header using Kafka 1. info
+	public static final String KAFKA_RAW_TRUCK_CSV_EVENT_TOPIC_NAME = "raw-all_truck_events_csv";
+		
 
 	public static final String KAFKA_TRUCK_SPEED_EVENT_TOPIC_NAME = "truck_speed_events_avro";
 	public static final String KAFKA_TRUCK_GEO_EVENT_TOPIC_NAME = "truck_events_avro";

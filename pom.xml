@@ -16,7 +16,7 @@
         <aws.kinesis.version>1.8.7</aws.kinesis.version>
         <junit.version>4.5</junit.version>
         <log4j2.version>2.6.2</log4j2.version>
-        <kafka.version>0.10.0.2.5.0.0-1245</kafka.version>
+        <kafka.version>1.0.0.3.1.0.0-501</kafka.version>
 		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
 		<org.springframework.spring.context.support>3.2.5.RELEASE</org.springframework.spring.context.support>	        
 	</properties>
@@ -84,7 +84,7 @@
 		
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
-			<artifactId>kafka_2.10</artifactId>
+			<artifactId>kafka_2.11</artifactId>
 			<version>${kafka.version}</version>		
 			<exclusions>
 				<exclusion>
