@@ -2,7 +2,7 @@
 <template encoding-version="1.2">
     <description></description>
     <groupId>7c84501d-d10c-407c-b9f3-1d80e38fe36a</groupId>
-    <name>Nifi_and_Schema_Registry_Integration_End_to_End_Example-Single-Source-Topic-v3</name>
+    <name>Nifi_and_Schema_Registry_Integration_End_to_End_Example-Single-Source-Topic-v4</name>
     <snippet>
         <controllerServices>
             <id>9537bde7-2dca-37ec-0000-000000000000</id>
@@ -205,7 +205,7 @@
                     <key>csvutils-character-set</key>
                 </entry>
             </properties>
-            <state>ENABLED</state>
+            <state>DISABLED</state>
             <type>org.apache.nifi.csv.CSVRecordSetWriter</type>
         </controllerServices>
         <controllerServices>
@@ -253,7 +253,7 @@
                     <value>1 hour</value>
                 </entry>
             </properties>
-            <state>ENABLED</state>
+            <state>DISABLED</state>
             <type>org.apache.nifi.schemaregistry.hortonworks.HortonworksSchemaRegistry</type>
         </controllerServices>
         <controllerServices>
@@ -437,7 +437,7 @@
                     <key>csvutils-character-set</key>
                 </entry>
             </properties>
-            <state>ENABLED</state>
+            <state>DISABLED</state>
             <type>org.apache.nifi.csv.CSVReader</type>
         </controllerServices>
         <controllerServices>
@@ -572,7 +572,7 @@ lookupService = new GroovyLookupService()</value>
                     <value>AIzaSyA-h19EtKZMbh33QXCWVdaK5gCFfbS-GAk</value>
                 </entry>
             </properties>
-            <state>ENABLED</state>
+            <state>DISABLED</state>
             <type>org.apache.nifi.lookup.script.ScriptedLookupService</type>
         </controllerServices>
         <controllerServices>
@@ -650,7 +650,7 @@ lookupService = new GroovyLookupService()</value>
                     <key>compression-format</key>
                 </entry>
             </properties>
-            <state>ENABLED</state>
+            <state>DISABLED</state>
             <type>org.apache.nifi.avro.AvroRecordSetWriter</type>
         </controllerServices>
         <labels>
@@ -696,6 +696,28 @@ so that SAM can work with the data.
             <comments></comments>
             <contents>
                 <connections>
+                    <id>bb7e30bc-7914-3fff-0000-000000000000</id>
+                    <parentGroupId>25576191-9d2e-3ec1-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>25576191-9d2e-3ec1-0000-000000000000</groupId>
+                        <id>b7bd657a-5efd-3127-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>25576191-9d2e-3ec1-0000-000000000000</groupId>
+                        <id>e03a7f85-a1ae-3b15-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                        <versionedComponentId>e03a7f85-a1ae-3b15-b1ad-0e4f2dc5a63e</versionedComponentId>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
                     <id>0f18120b-03e1-37a4-0000-000000000000</id>
                     <parentGroupId>25576191-9d2e-3ec1-0000-000000000000</parentGroupId>
                     <versionedComponentId>0f18120b-03e1-37a4-9845-a075ed46f983</versionedComponentId>
@@ -715,6 +737,28 @@ so that SAM can work with the data.
                         <id>b409f6c7-d8d6-3872-0000-000000000000</id>
                         <type>OUTPUT_PORT</type>
                         <versionedComponentId>b409f6c7-d8d6-3872-8237-ffeae25d3936</versionedComponentId>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>14cdc0c3-1be0-3de0-0000-000000000000</id>
+                    <parentGroupId>25576191-9d2e-3ec1-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>25576191-9d2e-3ec1-0000-000000000000</groupId>
+                        <id>b7bd657a-5efd-3127-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>25576191-9d2e-3ec1-0000-000000000000</groupId>
+                        <id>e2cf5a07-7cc4-3ed9-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                        <versionedComponentId>e2cf5a07-7cc4-3ed9-9785-3f0d159b2879</versionedComponentId>
                     </source>
                     <zIndex>0</zIndex>
                 </connections>
@@ -739,58 +783,6 @@ so that SAM can work with the data.
                         <id>b9dbb466-7adf-3181-0000-000000000000</id>
                         <type>PROCESSOR</type>
                         <versionedComponentId>b9dbb466-7adf-3181-9ce5-9e282359177d</versionedComponentId>
-                    </source>
-                    <zIndex>0</zIndex>
-                </connections>
-                <connections>
-                    <id>20e16940-d971-37d0-0000-000000000000</id>
-                    <parentGroupId>25576191-9d2e-3ec1-0000-000000000000</parentGroupId>
-                    <versionedComponentId>20e16940-d971-37d0-933f-1a7e1908eb5c</versionedComponentId>
-                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
-                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
-                    <destination>
-                        <groupId>25576191-9d2e-3ec1-0000-000000000000</groupId>
-                        <id>4bef1d2a-ffd8-3b4f-0000-000000000000</id>
-                        <type>PROCESSOR</type>
-                        <versionedComponentId>4bef1d2a-ffd8-3b4f-bb06-e8a68bf7b17c</versionedComponentId>
-                    </destination>
-                    <flowFileExpiration>0 sec</flowFileExpiration>
-                    <labelIndex>1</labelIndex>
-                    <name></name>
-                    <selectedRelationships>success</selectedRelationships>
-                    <source>
-                        <groupId>25576191-9d2e-3ec1-0000-000000000000</groupId>
-                        <id>e03a7f85-a1ae-3b15-0000-000000000000</id>
-                        <type>PROCESSOR</type>
-                        <versionedComponentId>e03a7f85-a1ae-3b15-b1ad-0e4f2dc5a63e</versionedComponentId>
-                    </source>
-                    <zIndex>0</zIndex>
-                </connections>
-                <connections>
-                    <id>5b2cd26f-a4a7-319b-0000-000000000000</id>
-                    <parentGroupId>25576191-9d2e-3ec1-0000-000000000000</parentGroupId>
-                    <versionedComponentId>5b2cd26f-a4a7-319b-8932-0d6d1bc0522a</versionedComponentId>
-                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
-                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
-                    <bends>
-                        <x>1464.6878662109375</x>
-                        <y>870.4926147460938</y>
-                    </bends>
-                    <destination>
-                        <groupId>25576191-9d2e-3ec1-0000-000000000000</groupId>
-                        <id>4bef1d2a-ffd8-3b4f-0000-000000000000</id>
-                        <type>PROCESSOR</type>
-                        <versionedComponentId>4bef1d2a-ffd8-3b4f-bb06-e8a68bf7b17c</versionedComponentId>
-                    </destination>
-                    <flowFileExpiration>0 sec</flowFileExpiration>
-                    <labelIndex>1</labelIndex>
-                    <name></name>
-                    <selectedRelationships>success</selectedRelationships>
-                    <source>
-                        <groupId>25576191-9d2e-3ec1-0000-000000000000</groupId>
-                        <id>e2cf5a07-7cc4-3ed9-0000-000000000000</id>
-                        <type>PROCESSOR</type>
-                        <versionedComponentId>e2cf5a07-7cc4-3ed9-9785-3f0d159b2879</versionedComponentId>
                     </source>
                     <zIndex>0</zIndex>
                 </connections>
@@ -993,8 +985,8 @@ look up schema in HWX SR</label>
                             <id>1989d676-45c7-3838-0000-000000000000</id>
                             <parentGroupId>769e4b1c-276f-3f25-0000-000000000000</parentGroupId>
                             <position>
-<x>447.28120884285</x>
-<y>103.5592970352966</y>
+<x>270.28120884285</x>
+<y>161.5592970352966</y>
                             </position>
                             <versionedComponentId>1989d676-45c7-3838-9bd1-16aa1843adbb</versionedComponentId>
                             <height>194.44070434570312</height>
@@ -1043,7 +1035,7 @@ Use ConsumeKafkaRecord do the following
                             <comments></comments>
                             <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
                             <name>Truck Geo Events</name>
-                            <state>RUNNING</state>
+                            <state>STOPPED</state>
                             <type>OUTPUT_PORT</type>
                         </outputPorts>
                         <outputPorts>
@@ -1057,7 +1049,7 @@ Use ConsumeKafkaRecord do the following
                             <comments></comments>
                             <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
                             <name>Truck Speed Events</name>
-                            <state>RUNNING</state>
+                            <state>STOPPED</state>
                             <type>OUTPUT_PORT</type>
                         </outputPorts>
                         <processors>
@@ -1168,7 +1160,7 @@ Use ConsumeKafkaRecord do the following
 <autoTerminate>false</autoTerminate>
 <name>truck_speed_event</name>
                             </relationships>
-                            <state>RUNNING</state>
+                            <state>STOPPED</state>
                             <style/>
                             <type>org.apache.nifi.processors.standard.QueryRecord</type>
                         </processors>
@@ -1378,7 +1370,7 @@ Use ConsumeKafkaRecord do the following
 <autoTerminate>false</autoTerminate>
 <name>success</name>
                             </relationships>
-                            <state>RUNNING</state>
+                            <state>STOPPED</state>
                             <style/>
                             <type>org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_1_0</type>
                         </processors>
@@ -1386,6 +1378,234 @@ Use ConsumeKafkaRecord do the following
                     <name>Acquire Events</name>
                     <variables/>
                 </processGroups>
+                <processors>
+                    <id>b7bd657a-5efd-3127-0000-000000000000</id>
+                    <parentGroupId>25576191-9d2e-3ec1-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>971.6871708080607</x>
+                        <y>977.3827511925354</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-kafka-1-0-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.5.0.3.1.0.0-501</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>bootstrap.servers</key>
+<value>
+    <name>bootstrap.servers</name>
+</value>
+                            </entry>
+                            <entry>
+<key>topic</key>
+<value>
+    <name>topic</name>
+</value>
+                            </entry>
+                            <entry>
+<key>record-reader</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.serialization.RecordReaderFactory</identifiesControllerService>
+    <name>record-reader</name>
+</value>
+                            </entry>
+                            <entry>
+<key>record-writer</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.serialization.RecordSetWriterFactory</identifiesControllerService>
+    <name>record-writer</name>
+</value>
+                            </entry>
+                            <entry>
+<key>use-transactions</key>
+<value>
+    <name>use-transactions</name>
+</value>
+                            </entry>
+                            <entry>
+<key>acks</key>
+<value>
+    <name>acks</name>
+</value>
+                            </entry>
+                            <entry>
+<key>attribute-name-regex</key>
+<value>
+    <name>attribute-name-regex</name>
+</value>
+                            </entry>
+                            <entry>
+<key>message-header-encoding</key>
+<value>
+    <name>message-header-encoding</name>
+</value>
+                            </entry>
+                            <entry>
+<key>security.protocol</key>
+<value>
+    <name>security.protocol</name>
+</value>
+                            </entry>
+                            <entry>
+<key>sasl.kerberos.service.name</key>
+<value>
+    <name>sasl.kerberos.service.name</name>
+</value>
+                            </entry>
+                            <entry>
+<key>sasl.kerberos.principal</key>
+<value>
+    <name>sasl.kerberos.principal</name>
+</value>
+                            </entry>
+                            <entry>
+<key>sasl.kerberos.keytab</key>
+<value>
+    <name>sasl.kerberos.keytab</name>
+</value>
+                            </entry>
+                            <entry>
+<key>ssl.context.service</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.ssl.SSLContextService</identifiesControllerService>
+    <name>ssl.context.service</name>
+</value>
+                            </entry>
+                            <entry>
+<key>message-key-field</key>
+<value>
+    <name>message-key-field</name>
+</value>
+                            </entry>
+                            <entry>
+<key>max.request.size</key>
+<value>
+    <name>max.request.size</name>
+</value>
+                            </entry>
+                            <entry>
+<key>ack.wait.time</key>
+<value>
+    <name>ack.wait.time</name>
+</value>
+                            </entry>
+                            <entry>
+<key>max.block.ms</key>
+<value>
+    <name>max.block.ms</name>
+</value>
+                            </entry>
+                            <entry>
+<key>partitioner.class</key>
+<value>
+    <name>partitioner.class</name>
+</value>
+                            </entry>
+                            <entry>
+<key>compression.type</key>
+<value>
+    <name>compression.type</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>bootstrap.servers</key>
+<value>hdf-hoosac4.field.hortonworks.com:6667</value>
+                            </entry>
+                            <entry>
+<key>topic</key>
+<value>${kafka.topic}</value>
+                            </entry>
+                            <entry>
+<key>record-reader</key>
+<value>afa5c551-475f-379b-0000-000000000000</value>
+                            </entry>
+                            <entry>
+<key>record-writer</key>
+<value>5f06fa5d-13be-3397-0000-000000000000</value>
+                            </entry>
+                            <entry>
+<key>use-transactions</key>
+<value>true</value>
+                            </entry>
+                            <entry>
+<key>acks</key>
+<value>all</value>
+                            </entry>
+                            <entry>
+<key>attribute-name-regex</key>
+                            </entry>
+                            <entry>
+<key>message-header-encoding</key>
+<value>UTF-8</value>
+                            </entry>
+                            <entry>
+<key>security.protocol</key>
+<value>PLAINTEXT</value>
+                            </entry>
+                            <entry>
+<key>sasl.kerberos.service.name</key>
+                            </entry>
+                            <entry>
+<key>sasl.kerberos.principal</key>
+                            </entry>
+                            <entry>
+<key>sasl.kerberos.keytab</key>
+                            </entry>
+                            <entry>
+<key>ssl.context.service</key>
+                            </entry>
+                            <entry>
+<key>message-key-field</key>
+                            </entry>
+                            <entry>
+<key>max.request.size</key>
+<value>1 MB</value>
+                            </entry>
+                            <entry>
+<key>ack.wait.time</key>
+<value>5 secs</value>
+                            </entry>
+                            <entry>
+<key>max.block.ms</key>
+<value>5 sec</value>
+                            </entry>
+                            <entry>
+<key>partitioner.class</key>
+<value>org.apache.kafka.clients.producer.internals.DefaultPartitioner</value>
+                            </entry>
+                            <entry>
+<key>compression.type</key>
+<value>none</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <name>Publish Events to Truck Stream Topics</name>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>failure</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.kafka.pubsub.PublishKafkaRecord_1_0</type>
+                </processors>
                 <processors>
                     <id>b9dbb466-7adf-3181-0000-000000000000</id>
                     <parentGroupId>25576191-9d2e-3ec1-0000-000000000000</parentGroupId>
@@ -1468,7 +1688,7 @@ Use ConsumeKafkaRecord do the following
                         <autoTerminate>false</autoTerminate>
                         <name>success</name>
                     </relationships>
-                    <state>RUNNING</state>
+                    <state>STOPPED</state>
                     <style/>
                     <type>org.apache.nifi.processors.attributes.UpdateAttribute</type>
                 </processors>
@@ -1593,7 +1813,7 @@ Use ConsumeKafkaRecord do the following
                         <autoTerminate>false</autoTerminate>
                         <name>success</name>
                     </relationships>
-                    <state>RUNNING</state>
+                    <state>STOPPED</state>
                     <style/>
                     <type>org.apache.nifi.processors.standard.LookupRecord</type>
                 </processors>
@@ -1679,209 +1899,9 @@ Use ConsumeKafkaRecord do the following
                         <autoTerminate>false</autoTerminate>
                         <name>success</name>
                     </relationships>
-                    <state>RUNNING</state>
+                    <state>STOPPED</state>
                     <style/>
                     <type>org.apache.nifi.processors.attributes.UpdateAttribute</type>
-                </processors>
-                <processors>
-                    <id>4bef1d2a-ffd8-3b4f-0000-000000000000</id>
-                    <parentGroupId>25576191-9d2e-3ec1-0000-000000000000</parentGroupId>
-                    <position>
-                        <x>947.3413272193038</x>
-                        <y>989.3658111325781</y>
-                    </position>
-                    <versionedComponentId>4bef1d2a-ffd8-3b4f-bb06-e8a68bf7b17c</versionedComponentId>
-                    <bundle>
-                        <artifact>nifi-kafka-0-10-nar</artifact>
-                        <group>org.apache.nifi</group>
-                        <version>1.5.0.3.1.0.0-501</version>
-                    </bundle>
-                    <config>
-                        <bulletinLevel>WARN</bulletinLevel>
-                        <comments></comments>
-                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
-                        <descriptors>
-                            <entry>
-<key>bootstrap.servers</key>
-<value>
-    <name>bootstrap.servers</name>
-</value>
-                            </entry>
-                            <entry>
-<key>topic</key>
-<value>
-    <name>topic</name>
-</value>
-                            </entry>
-                            <entry>
-<key>record-reader</key>
-<value>
-    <identifiesControllerService>org.apache.nifi.serialization.RecordReaderFactory</identifiesControllerService>
-    <name>record-reader</name>
-</value>
-                            </entry>
-                            <entry>
-<key>record-writer</key>
-<value>
-    <identifiesControllerService>org.apache.nifi.serialization.RecordSetWriterFactory</identifiesControllerService>
-    <name>record-writer</name>
-</value>
-                            </entry>
-                            <entry>
-<key>security.protocol</key>
-<value>
-    <name>security.protocol</name>
-</value>
-                            </entry>
-                            <entry>
-<key>sasl.kerberos.service.name</key>
-<value>
-    <name>sasl.kerberos.service.name</name>
-</value>
-                            </entry>
-                            <entry>
-<key>sasl.kerberos.principal</key>
-<value>
-    <name>sasl.kerberos.principal</name>
-</value>
-                            </entry>
-                            <entry>
-<key>sasl.kerberos.keytab</key>
-<value>
-    <name>sasl.kerberos.keytab</name>
-</value>
-                            </entry>
-                            <entry>
-<key>ssl.context.service</key>
-<value>
-    <identifiesControllerService>org.apache.nifi.ssl.SSLContextService</identifiesControllerService>
-    <name>ssl.context.service</name>
-</value>
-                            </entry>
-                            <entry>
-<key>acks</key>
-<value>
-    <name>acks</name>
-</value>
-                            </entry>
-                            <entry>
-<key>message-key-field</key>
-<value>
-    <name>message-key-field</name>
-</value>
-                            </entry>
-                            <entry>
-<key>max.request.size</key>
-<value>
-    <name>max.request.size</name>
-</value>
-                            </entry>
-                            <entry>
-<key>ack.wait.time</key>
-<value>
-    <name>ack.wait.time</name>
-</value>
-                            </entry>
-                            <entry>
-<key>max.block.ms</key>
-<value>
-    <name>max.block.ms</name>
-</value>
-                            </entry>
-                            <entry>
-<key>partitioner.class</key>
-<value>
-    <name>partitioner.class</name>
-</value>
-                            </entry>
-                            <entry>
-<key>compression.type</key>
-<value>
-    <name>compression.type</name>
-</value>
-                            </entry>
-                        </descriptors>
-                        <executionNode>ALL</executionNode>
-                        <lossTolerant>false</lossTolerant>
-                        <penaltyDuration>30 sec</penaltyDuration>
-                        <properties>
-                            <entry>
-<key>bootstrap.servers</key>
-<value>hdf-hoosac4.field.hortonworks.com:6667</value>
-                            </entry>
-                            <entry>
-<key>topic</key>
-<value>${kafka.topic}</value>
-                            </entry>
-                            <entry>
-<key>record-reader</key>
-<value>afa5c551-475f-379b-0000-000000000000</value>
-                            </entry>
-                            <entry>
-<key>record-writer</key>
-<value>5f06fa5d-13be-3397-0000-000000000000</value>
-                            </entry>
-                            <entry>
-<key>security.protocol</key>
-<value>PLAINTEXT</value>
-                            </entry>
-                            <entry>
-<key>sasl.kerberos.service.name</key>
-                            </entry>
-                            <entry>
-<key>sasl.kerberos.principal</key>
-                            </entry>
-                            <entry>
-<key>sasl.kerberos.keytab</key>
-                            </entry>
-                            <entry>
-<key>ssl.context.service</key>
-                            </entry>
-                            <entry>
-<key>acks</key>
-<value>0</value>
-                            </entry>
-                            <entry>
-<key>message-key-field</key>
-                            </entry>
-                            <entry>
-<key>max.request.size</key>
-<value>1 MB</value>
-                            </entry>
-                            <entry>
-<key>ack.wait.time</key>
-<value>5 secs</value>
-                            </entry>
-                            <entry>
-<key>max.block.ms</key>
-<value>5 sec</value>
-                            </entry>
-                            <entry>
-<key>partitioner.class</key>
-<value>org.apache.kafka.clients.producer.internals.DefaultPartitioner</value>
-                            </entry>
-                            <entry>
-<key>compression.type</key>
-<value>none</value>
-                            </entry>
-                        </properties>
-                        <runDurationMillis>0</runDurationMillis>
-                        <schedulingPeriod>0 sec</schedulingPeriod>
-                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
-                        <yieldDuration>1 sec</yieldDuration>
-                    </config>
-                    <name>Publish Events to Truck Stream Topics</name>
-                    <relationships>
-                        <autoTerminate>true</autoTerminate>
-                        <name>failure</name>
-                    </relationships>
-                    <relationships>
-                        <autoTerminate>true</autoTerminate>
-                        <name>success</name>
-                    </relationships>
-                    <state>RUNNING</state>
-                    <style/>
-                    <type>org.apache.nifi.processors.kafka.pubsub.PublishKafkaRecord_0_10</type>
                 </processors>
             </contents>
             <name>Use Case 1</name>
@@ -1900,5 +1920,5 @@ Use ConsumeKafkaRecord do the following
             </versionControlInformation>
         </processGroups>
     </snippet>
-    <timestamp>01/22/2018 20:18:55 UTC</timestamp>
+    <timestamp>01/22/2018 22:31:42 UTC</timestamp>
 </template>
