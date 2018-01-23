@@ -21,6 +21,7 @@ import com.hortonworks.registries.schemaregistry.SchemaIdVersion;
 import com.hortonworks.registries.schemaregistry.SchemaMetadata;
 import com.hortonworks.registries.schemaregistry.SchemaMetadataInfo;
 import com.hortonworks.registries.schemaregistry.SchemaVersion;
+import com.hortonworks.registries.schemaregistry.SchemaVersionInfo;
 import com.hortonworks.registries.schemaregistry.avro.AvroSchemaProvider;
 import com.hortonworks.registries.schemaregistry.client.SchemaRegistryClient;
        
@@ -90,15 +91,12 @@ public class TruckSchemaRegistryLoader {
 		
 		SchemaBranch masterBranch = getMasterBranch(schemaName);
 		
+		SchemaVersionInfo schemaVersionInfo = schemaRegistryClient.getLatestSchemaVersionInfo(schemaName);
 		
-		if(masterBranch == null) {
-			LOG.info("Schema[" + schemaName + "] doesn't exist. Nothing to delete");
-			return;
-			
-		}
+		
 		
 		Map<String, String> mapParams = new HashMap<String, String>();
-		mapParams.put("id", masterBranch.getId().toString());
+		mapParams.put("id", schemaVersionInfo.getVersion().toString());
 		mapParams.put("schemaName", schemaName);
 		String url = constructRESTUrl("/schemaregistry/schemas/{schemaName}/versions/{id}");
 		
