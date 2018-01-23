@@ -77,7 +77,7 @@ public class TruckSchemaRegistryLoader {
 		}		
 	}
 
-	public void cleanupSchemaRegistry() {
+	public void cleanupSchemaRegistry() throws Exception {
 		
 		deleteSchema(TruckSchemaConfig.KAFKA_RAW_TRUCK_GEO_EVENT_SCHEMA_NAME);
 	
@@ -86,7 +86,7 @@ public class TruckSchemaRegistryLoader {
 
 	
 	
-	private void deleteSchema(String schemaName) {
+	private void deleteSchema(String schemaName) throws Exception {
 		
 		SchemaBranch masterBranch = getMasterBranch(schemaName);
 		
@@ -339,7 +339,7 @@ public class TruckSchemaRegistryLoader {
 		//mapSeDeserializers(schemaName);
 	}	    
 
-	private SchemaBranch getMasterBranch(String schemaName) {
+	private SchemaBranch getMasterBranch(String schemaName) throws Exception{
 		SchemaBranch masterBranch = null;
 		Collection<SchemaBranch> branches = schemaRegistryClient.getSchemaBranches(schemaName);
 		if(branches == null || branches.isEmpty()) 

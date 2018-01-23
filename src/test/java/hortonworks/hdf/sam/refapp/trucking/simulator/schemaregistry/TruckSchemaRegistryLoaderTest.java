@@ -62,12 +62,12 @@ public class TruckSchemaRegistryLoaderTest {
 	}
 	
 	@Test
-	public void deleteTruckSchemasInSchemaRegistry() {
+	public void deleteTruckSchemasInSchemaRegistry() throws Exception {
 		registryLoader.cleanupSchemaRegistry();
 	}
 	
 	@Test
-	public void getSchemaBranches() {
+	public void getSchemaBranches() throws Exception {
 		Collection<SchemaBranch> branches = registryLoader.schemaRegistryClient.getSchemaBranches(TruckSchemaConfig.KAFKA_RAW_TRUCK_GEO_EVENT_SCHEMA_NAME);
 		LOG.info(branches.toString());
 	}
