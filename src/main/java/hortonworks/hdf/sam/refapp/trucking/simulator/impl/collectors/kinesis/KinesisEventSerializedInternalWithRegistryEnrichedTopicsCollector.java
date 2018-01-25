@@ -7,6 +7,8 @@ import hortonworks.hdf.sam.refapp.trucking.simulator.schemaregistry.TruckSchemaC
 
 import java.nio.ByteBuffer;
 
+import org.apache.avro.generic.GenericRecord;
+
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.kinesis.AmazonKinesis;
@@ -134,7 +136,7 @@ public class KinesisEventSerializedInternalWithRegistryEnrichedTopicsCollector e
 		AvroSnapshotSerializer serializer = createSerializer();		
 				
 		Object truckGeoEvent = createGenericRecordForTruckGeoEvent("/schema/truck-geo-event-kafka.avsc", event);
-		
+		((GenericRecord)truckGeoEvent).put("geoAddress", "623 Kerryyton Place Circle"); 
 	
        // Now we have the payload in right format (Avro GenericRecord), lets serialize
        SchemaMetadata schemaMetadata = new SchemaMetadata.Builder(TruckSchemaConfig.KAFKA_TRUCK_GEO_EVENT_TOPIC_NAME)
