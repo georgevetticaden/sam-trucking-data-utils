@@ -1,5 +1,6 @@
 package hortonworks.hdf.sam.refapp.trucking.simulator;
 
+import hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.SecurityType;
 import hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.EventSourceType;
 import hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.TruckConfiguration;
 import hortonworks.hdf.sam.refapp.trucking.simulator.impl.messages.StartSimulation;
@@ -25,6 +26,9 @@ public class SimulationRunnerApp {
 				String eventSourceString = args[7];
 				EventSourceType eventSource = EventSourceType.valueOf(eventSourceString);
 				
+				String securityTypeStrig = args[8];
+				SecurityType securityType = SecurityType.valueOf(securityTypeStrig);				
+				
 				TruckConfiguration.initialize(routesDirectory);
 				final int numberOfEventEmitters=TruckConfiguration.freeRoutePool.size();
 		
@@ -34,7 +38,7 @@ public class SimulationRunnerApp {
 				final ActorRef listener = system.actorOf(
 						Props.create(SimulatorListener.class), "listener");
 				final ActorRef eventCollector = system.actorOf(
-						Props.create(eventCollectorClass, argForCollector, eventSource), "eventCollector");
+						Props.create(eventCollectorClass, argForCollector, eventSource, securityType), "eventCollector");
 				System.out.println(eventCollector.path());
 				
 				

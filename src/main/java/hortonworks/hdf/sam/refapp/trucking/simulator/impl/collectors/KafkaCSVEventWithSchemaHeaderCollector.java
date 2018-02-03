@@ -1,5 +1,6 @@
 package hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors;
 
+import hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.SecurityType;
 import hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.EventSourceType;
 import hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.MobileEyeEvent;
 import hortonworks.hdf.sam.refapp.trucking.simulator.schemaregistry.TruckSchemaConfig;
@@ -8,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import kafka.producer.ProducerConfig;
+
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -22,18 +26,26 @@ public class KafkaCSVEventWithSchemaHeaderCollector extends BaseTruckEventCollec
 	private KafkaProducer<String, String> kafkaProducer;
 	private EventSourceType eventSourceType;
 
-	public KafkaCSVEventWithSchemaHeaderCollector(String kafkaBrokerList, EventSourceType eventSource) {
+	public KafkaCSVEventWithSchemaHeaderCollector(String kafkaBrokerList, EventSourceType eventSource, SecurityType securityType) {
 		this.eventSourceType = eventSource;
         Properties props = new Properties();
         props.put("bootstrap.servers", kafkaBrokerList);
 
-        props.put("request.required.acks", "1");
+        props.put("acks", "1");
         
         props.put("key.serializer", 
                 "org.apache.kafka.common.serialization.StringSerializer");
                 
              props.put("value.serializer", 
-                "org.apache.kafka.common.serialization.StringSerializer");        
+                "org.apache.kafka.common.serialization.StringSerializer");   
+             
+		 
+        /* If talking to secure Kafka cluster, set security protocol as "SASL_PLAINTEXT */
+		if(SecurityType.SECURE.equals(securityType)) {
+		 	props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");  
+		 	props.put("sasl.kerberos.service.name", "kafka");
+
+		}
  
         try {		
             kafkaProducer = new KafkaProducer<String, String>(props);        	
@@ -109,7 +121,13 @@ public class KafkaCSVEventWithSchemaHeaderCollector extends BaseTruckEventCollec
 	 private  class MyProducerCallback implements Callback {
 	        @Override
 	        public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-	           // logger.info("#### received [{}], ex: [{}]", recordMetadata, e);
+	        	if(e != null) {
+	        		if(recordMetadata == null) {
+	        			logger.info("Exception thrown when sending message: " + e);
+	        		} else {
+	        			logger.info("Exception thrown when sending message: " + recordMetadata.toString() , e);
+	        		}
+	        	}
 	        }
 	}	
 
