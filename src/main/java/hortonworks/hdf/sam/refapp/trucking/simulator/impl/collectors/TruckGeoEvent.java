@@ -2,19 +2,25 @@ package hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors;
 
 import java.io.Serializable;
 
-public class TruckGeoEent implements Serializable {
+public class TruckGeoEvent implements Serializable {
+	
+
+
+	private static final long serialVersionUID = -2079662627167609187L;
 	
 	private String eventTime;
+	private Long eventTimeLong;	
 	private String eventSource;
+	
 	private Integer truckId;
 	private Integer driverId;
 	private String driverName;
 	private Integer routeId;
 	private String route;
 	private String eventType;
-	private double longitude;
-	private double latitude;
-	private double correlationId;
+	private Double longitude;
+	private Double latitude;
+	private Long correlationId;
 	
 	public String getEventTime() {
 		return eventTime;
@@ -64,22 +70,29 @@ public class TruckGeoEent implements Serializable {
 	public void setEventType(String eventType) {
 		this.eventType = eventType;
 	}
-	public double getLongitude() {
+
+	public Long getEventTimeLong() {
+		return eventTimeLong;
+	}
+	public void setEventTimeLong(Long eventTimeLong) {
+		this.eventTimeLong = eventTimeLong;
+	}
+	public Double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(double longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	public double getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(double latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-	public double getCorrelationId() {
+	public Long getCorrelationId() {
 		return correlationId;
 	}
-	public void setCorrelationId(double correlationId) {
+	public void setCorrelationId(Long correlationId) {
 		this.correlationId = correlationId;
 	}
 	

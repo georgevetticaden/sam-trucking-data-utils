@@ -3,8 +3,10 @@ package hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors;
 import java.io.Serializable;
 
 public class TruckSpeedEvent implements Serializable {
-	
+
+	private static final long serialVersionUID = -1196296874472705502L;
 	private String eventTime;
+	private Long eventTimeLong;
 	private String eventSource;
 	private Integer truckId;
 	private Integer driverId;
@@ -59,6 +61,12 @@ public class TruckSpeedEvent implements Serializable {
 	}
 	public void setSpeed(Integer speed) {
 		this.speed = speed;
+	}
+	public Long getEventTimeLong() {
+		return eventTimeLong;
+	}
+	public void setEventTimeLong(Long eventTimeLong) {
+		this.eventTimeLong = eventTimeLong;
 	}
 	
 	
