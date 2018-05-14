@@ -39,7 +39,7 @@ public class KafkaCSVEventWithSchemaHeaderCollector extends BaseTruckEventCollec
         props.put("value.serializer", 
                 "org.apache.kafka.common.serialization.StringSerializer");   
         
-        props.put(CommonClientConfigs.CLIENT_ID_CONFIG, "truck-sensors-producer");
+        props.put(CommonClientConfigs.CLIENT_ID_CONFIG, "truck-sensors-producer-2");
              
 		 
         /* If talking to secure Kafka cluster, set security protocol as "SASL_PLAINTEXT */
