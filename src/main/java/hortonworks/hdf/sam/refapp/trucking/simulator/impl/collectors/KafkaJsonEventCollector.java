@@ -40,9 +40,11 @@ public class KafkaJsonEventCollector extends BaseTruckEventCollector {
         props.put("key.serializer", 
                 "org.apache.kafka.common.serialization.StringSerializer");
                 
-             props.put("value.serializer", 
+        props.put("value.serializer", 
                 "org.apache.kafka.common.serialization.StringSerializer");   
-             
+        
+        props.put(CommonClientConfigs.CLIENT_ID_CONFIG, "truck-sensors-producer-json");
+        
 		 
         /* If talking to secure Kafka cluster, set security protocol as "SASL_PLAINTEXT */
 		if(SecurityType.SECURE.equals(securityType)) {
