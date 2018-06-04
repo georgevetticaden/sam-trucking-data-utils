@@ -2,7 +2,7 @@
 <template encoding-version="1.2">
     <description></description>
     <groupId>7c84501d-d10c-407c-b9f3-1d80e38fe36a</groupId>
-    <name>Nifi_and_Schema_Registry_Integration_End_to_End_Example-Single-Source-Topic-SAM-Spark-Consumers.xml</name>
+    <name>Nifi_and_Schema_Registry_Integration_End_to_End_Example-Single-Source-Topic-SAM-Spark-Consumers</name>
     <snippet>
         <controllerServices>
             <id>425fd18a-e95a-3da8-0000-000000000000</id>
@@ -872,12 +872,44 @@ lookupService = new GroovyLookupService()</value>
             <state>ENABLED</state>
             <type>org.apache.nifi.json.JsonRecordSetWriter</type>
         </controllerServices>
-        <processGroups>
-            <id>86635c8c-63b6-3501-0000-000000000000</id>
+        <labels>
+            <id>4336c5b7-697d-36ec-0000-000000000000</id>
             <parentGroupId>46f95fe5-3024-31d8-0000-000000000000</parentGroupId>
             <position>
                 <x>0.0</x>
                 <y>0.0</y>
+            </position>
+            <height>424.1869812011719</height>
+            <label>1. Nifi ingest  Trucking CSV Events with kafka headers 
+that contains schema name which is a pointer to 
+schema in HWX Schema Registry.. 
+ 
+2. Nifi extracts the schema name from kafka header
+and fetches schema from the HWX Schema Registry 
+to perform record based processing including
+filtering, routing and enrichment
+ 
+3. These CSV records are then enriched and converted
+into Avro Records and send to a Kafka Topic. 
+When publishing to Kafka Topic, Nifi will look up 
+the schema associated with the kafka topic in HWX SR 
+and encode the Avro binary with HWX schema encoding 
+so that SAM can work with the data. 
+</label>
+            <style>
+                <entry>
+                    <key>font-size</key>
+                    <value>20px</value>
+                </entry>
+            </style>
+            <width>535.7506103515625</width>
+        </labels>
+        <processGroups>
+            <id>86635c8c-63b6-3501-0000-000000000000</id>
+            <parentGroupId>46f95fe5-3024-31d8-0000-000000000000</parentGroupId>
+            <position>
+                <x>88.1064677249376</x>
+                <y>455.0239382346426</y>
             </position>
             <comments></comments>
             <contents>
@@ -1778,7 +1810,7 @@ look up schema in HWX SR</label>
                             </entry>
                             <entry>
 <key>topic</key>
-<value>truck-events-avro</value>
+<value>truck_events_avro</value>
                             </entry>
                             <entry>
 <key>record-reader</key>
@@ -2901,5 +2933,5 @@ look up schema in HWX SR</label>
             <variables/>
         </processGroups>
     </snippet>
-    <timestamp>06/04/2018 18:32:19 UTC</timestamp>
+    <timestamp>06/04/2018 20:36:22 UTC</timestamp>
 </template>
