@@ -20,7 +20,7 @@ public class TruckConfiguration {
 	private static Logger LOGGER = LoggerFactory.getLogger(TruckConfiguration.class);
 
 	public static final long END_ROUTE_AFTER_METERS = 120000; // 75 miles
-	private static final int TRUCK_FLEET_SIZE=100;	
+	private static final int TRUCK_FLEET_SIZE=1000;	
 	private static final int TRUCK_ID_START = 10;
 	public static final int MAX_ROUTE_TRAVERSAL_COUNT = 10;
 	
@@ -75,7 +75,7 @@ public class TruckConfiguration {
 		Iterator<Route> iterator = freeRoutePool.iterator();
 		while(iterator.hasNext()) {
 			Route route = iterator.next();
-			
+			System.out.println(route.getRouteName());
 			if(route.getRouteName().equals(routeName)) {
 				return route;
 			}

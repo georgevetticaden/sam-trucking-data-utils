@@ -57,8 +57,7 @@ public class Truck extends AbstractEventEmitter{
 		
 		LOG.info("New Truck Instance["+truckId + "] with Driver["+driver.getDriverName()+ "] has started  new Route["+driver.getRoute().getRouteName() + "], RouteId["+ driver.getRoute().getRouteId()+"]");
 	}	
-
-
+			
 	public MobileEyeEvent generateEvent() {
 		
 		/* If the route has ended, then assign a new truck to the driver. */
