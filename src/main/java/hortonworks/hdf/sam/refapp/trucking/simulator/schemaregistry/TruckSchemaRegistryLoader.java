@@ -70,6 +70,12 @@ public class TruckSchemaRegistryLoader {
 			populateSchemaRegistryForTruckGeoEventInKafka();
 			populateSchemaRegistryForTruckSpeedEventInKafka();
 			
+			/* Populate the 2 schemas for the SMM Demo */
+			populateSchemaRegistryForTruckGeoEventInKafkaForSMM();
+			populateSchemaRegistryForTruckSpeedEventInKafkaForSMM();
+			
+			
+			
 			
 		} catch (Exception e) {
 			String errorMsg = "Error loading data into Schema Registry for truck events";
@@ -173,6 +179,28 @@ public class TruckSchemaRegistryLoader {
 		//mapSeDeserializers(schemaName);
 	}	
 	
+	private void populateSchemaRegistryForTruckGeoEventInKafkaForSMM() throws Exception {
+		/* If schema exists, don't add */
+		SchemaMetadataInfo metaInfo= schemaRegistryClient.getSchemaMetadataInfo(TruckSchemaConfig.KAFKA_TRUCK_GEO_EVENT_FOR_SMM_SCHEMA_NAME);
+		if(metaInfo != null) {
+			LOG.warn("Schema["+ TruckSchemaConfig.KAFKA_TRUCK_GEO_EVENT_FOR_SMM_SCHEMA_NAME + "] already exists. Not creating another one");
+			return;
+		}
+		
+		String schemaGroup = TruckSchemaConfig.KAFKA_SCHEMA_GROUP_NAME;
+		String schemaName = TruckSchemaConfig.KAFKA_TRUCK_GEO_EVENT_FOR_SMM_SCHEMA_NAME;
+		String schemaType = AvroSchemaProvider.TYPE;
+		String description = "Enriched Geo events from trucks in Kafka Topic";
+		SchemaCompatibility compatiblity = SchemaCompatibility.BACKWARD;
+		String schemaContentFileName = "/schema/truck-geo-event-kafka.avsc";
+		
+		registerSchemaMetaData(schemaGroup, schemaName, schemaType, description, compatiblity);
+		addSchemaVersion(schemaName, schemaContentFileName, description);
+		//mapSeDeserializers(schemaName);
+	}		
+	
+	
+	
 	private void populateSchemaRegistryForTruckSpeedEventInKafka() throws Exception {
 
 		/* If schema exists, don't add */
@@ -184,6 +212,27 @@ public class TruckSchemaRegistryLoader {
 		
 		String schemaGroup = TruckSchemaConfig.KAFKA_SCHEMA_GROUP_NAME;
 		String schemaName = TruckSchemaConfig.KAFKA_TRUCK_SPEED_EVENT_SCHEMA_NAME;
+		String schemaType = AvroSchemaProvider.TYPE;
+		String description = "Enriched Speed Events from trucks in Kafka Topic";
+		SchemaCompatibility compatiblity = SchemaCompatibility.BACKWARD;
+		String schemaContentFileName = "/schema/truck-speed-event-kafka.avsc";
+		
+		registerSchemaMetaData(schemaGroup, schemaName, schemaType, description, compatiblity);
+		addSchemaVersion(schemaName, schemaContentFileName, description);
+		//mapSeDeserializers(schemaName);
+	}	
+	
+	private void populateSchemaRegistryForTruckSpeedEventInKafkaForSMM() throws Exception {
+
+		/* If schema exists, don't add */
+		SchemaMetadataInfo metaInfo= schemaRegistryClient.getSchemaMetadataInfo(TruckSchemaConfig.KAFKA_TRUCK_SPEED_EVENT_FOR_SMM_SCHEMA_NAME);
+		if(metaInfo != null) {
+			LOG.warn("Schema["+ TruckSchemaConfig.KAFKA_TRUCK_SPEED_EVENT_FOR_SMM_SCHEMA_NAME + "] already exists. Not creating another one");
+			return;
+		}
+		
+		String schemaGroup = TruckSchemaConfig.KAFKA_SCHEMA_GROUP_NAME;
+		String schemaName = TruckSchemaConfig.KAFKA_TRUCK_SPEED_EVENT_FOR_SMM_SCHEMA_NAME;
 		String schemaType = AvroSchemaProvider.TYPE;
 		String description = "Enriched Speed Events from trucks in Kafka Topic";
 		SchemaCompatibility compatiblity = SchemaCompatibility.BACKWARD;
