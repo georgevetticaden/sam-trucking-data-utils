@@ -2,21 +2,21 @@
 
 export JAVA_HOME=$(find /usr/jdk64 -iname 'jdk1.8*' -type d)
 export PATH=$PATH:$JAVA_HOME/bin
-export numOfInternational=30
+export numOfEuropeTrucks=15
 export kafkaBrokers="a-summit11.field.hortonworks.com:6667,a-summit12.field.hortonworks.com:6667,a-summit13.field.hortonworks.com:6667,a-summit14.field.hortonworks.com:6667,a-summit15.field.hortonworks.com:6667"
 
 
-createInternationalTrucks() {
+createEuropeTrucks() {
 	echo "----------------- Starting International Fleet  ----------------- "
-	for ((i=1;i<=numOfInternational;i++)); do
+	for ((i=1;i<=numOfEuropeTrucks;i++)); do
 	
 		clientProducerId='europe-truck-i'$i
-		logFile='i'$i'.out'
+		logFile='europe'$i'.out'
   		echo $clientProducerId
 	
 		nohup java -cp \
 		stream-simulator-jar-with-dependencies.jar \
-		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
+		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 		-1 \
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
@@ -27,10 +27,7 @@ createInternationalTrucks() {
 		ALL_STREAMS \
 		NONSECURE \
 		$clientProducerId \
-		gateway-international-raw-sensors \
-		10 \
-		"Saint Louis to Tulsa" \
-		10 > $logFile &
+		gateway-europe-raw-sensors > $logFile &
 	done
 }
 
@@ -207,7 +204,7 @@ nohup java -cp \
 }
 
 createUSFleet;
-createInternationalTrucks;
+createEuropeTrucks;
 
 	
 
