@@ -2,10 +2,39 @@
 
 export JAVA_HOME=$(find /usr/jdk64 -iname 'jdk1.8*' -type d)
 export PATH=$PATH:$JAVA_HOME/bin
+export numOfInternational=30
+export kafkaBrokers="a-summit11.field.hortonworks.com:6667,a-summit12.field.hortonworks.com:6667,a-summit13.field.hortonworks.com:6667,a-summit14.field.hortonworks.com:6667,a-summit15.field.hortonworks.com:6667"
 
-if [ $# -ne 1 ]; then
-        echo "Please pass broker:port urls to run as the first argument."
-else
+
+createInternationalTrucks() {
+	echo "----------------- Starting International Fleet  ----------------- "
+	for ((i=1;i<=numOfInternational;i++)); do
+	
+		clientProducerId='europe-truck-i'$i
+		logFile='i'$i'.out'
+  		echo $clientProducerId
+	
+		nohup java -cp \
+		stream-simulator-jar-with-dependencies.jar \
+		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
+		-1 \
+		hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
+		hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
+		1 \
+		/root/workspace/Data-Loader/routes/midwest/ \
+		5000 \
+		$kafkaBrokers \
+		ALL_STREAMS \
+		NONSECURE \
+		$clientProducerId \
+		gateway-international-raw-sensors \
+		10 \
+		"Saint Louis to Tulsa" \
+		10 > $logFile &
+	done
+}
+
+createUSFleet() {
 
 echo "----------------- Starting US West Truck Fleet ----------------- "
 
@@ -18,7 +47,7 @@ nohup java -cp \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
 	5000 \
-	$1 \
+	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
 	minifi-truck-w1 \
@@ -36,7 +65,7 @@ nohup java -cp \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
 	5000 \
-	$1 \
+	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
 	minifi-truck-w2 \
@@ -54,7 +83,7 @@ nohup java -cp \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
 	5000 \
-	$1 \
+	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
 	minifi-truck-w3 \
@@ -73,7 +102,7 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
 	5000 \
-	$1 \
+	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
 	minifi-truck-c1 \
@@ -91,7 +120,7 @@ nohup java -cp \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
 	5000 \
-	$1 \
+	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
 	minifi-truck-c2 \
@@ -109,7 +138,7 @@ nohup java -cp \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
 	5000 \
-	$1 \
+	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
 	minifi-truck-c3 \
@@ -129,7 +158,7 @@ nohup java -cp \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
 	5000 \
-	$1 \
+	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
 	minifi-truck-e1 \
@@ -147,7 +176,7 @@ nohup java -cp \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
 	5000 \
-	$1 \
+	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
 	minifi-truck-e2 \
@@ -166,7 +195,7 @@ nohup java -cp \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
 	5000 \
-	$1 \
+	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
 	minifi-truck-e3 \
@@ -175,4 +204,11 @@ nohup java -cp \
 	"Des Moines to Chicago Route 2" \
 	18 > e3.out &
 
-fi
+}
+
+createUSFleet;
+createInternationalTrucks;
+
+	
+
+
