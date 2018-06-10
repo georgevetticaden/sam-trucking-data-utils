@@ -46,6 +46,9 @@ public class SMMTruckEventCSVGenerator extends BaseTruckEventCollector {
                 "org.apache.kafka.common.serialization.StringSerializer");   
         
         props.put(CommonClientConfigs.CLIENT_ID_CONFIG, producerName);
+        
+        System.out.println("Producer Name is: " + producerName);
+        System.out.println("Topic name is" + topicName);
              
 		 
         /* If talking to secure Kafka cluster, set security protocol as "SASL_PLAINTEXT */
@@ -84,14 +87,14 @@ public class SMMTruckEventCSVGenerator extends BaseTruckEventCollector {
 	private void sendTruckSpeedEventToKafka(MobileEyeEvent mee) {
 		String eventToPass = createTruckSpeedEvent(mee);
 		String driverId = String.valueOf(mee.getTruck().getDriver().getDriverId());
-		logger.debug("Creating truck geo event["+eventToPass+"] for driver["+mee.getTruck().getDriver().getDriverId() + "] in truck [" + mee.getTruck() + "]");	
+		//logger.debug("Creating truck geo event["+eventToPass+"] for driver["+mee.getTruck().getDriver().getDriverId() + "] in truck [" + mee.getTruck() + "]");	
 		
 		
 		try {
 			final Callback callback = new MyProducerCallback();
 			Iterable<Header> kafkaHeaders = createKafkaHeaderWithSchema(TruckSchemaConfig.KAFKA_RAW_TRUCK_SPEED_EVENT_SCHEMA_NAME);
 			ProducerRecord<String, String> data = new ProducerRecord<String, String>(this.topicName, null, driverId, eventToPass, kafkaHeaders);
-			//logger.debug("Truck Speed Kafka Record with Header is: " + data);
+			logger.debug("Truck Speed Kafka Record with Header is: " + data);
 			kafkaProducer.send(data, callback);			
 		} catch (Exception e) {
 			logger.error("Error sending csv geo event[" + eventToPass + "] to  Kafka topic["+this.topicName+"]", e);
@@ -103,13 +106,13 @@ public class SMMTruckEventCSVGenerator extends BaseTruckEventCollector {
 	private void sendTruckEventToKafka(MobileEyeEvent mee) {
 		String eventToPass = createTruckGeoEvent(mee);
 		String driverId = String.valueOf(mee.getTruck().getDriver().getDriverId());
-		logger.debug("Creating  truck speed event["+eventToPass+"] for driver["+mee.getTruck().getDriver().getDriverId() + "] in truck [" + mee.getTruck() + "]");			
+		//logger.debug("Creating  truck speed event["+eventToPass+"] for driver["+mee.getTruck().getDriver().getDriverId() + "] in truck [" + mee.getTruck() + "]");			
 				
 		try {
 			final Callback callback = new MyProducerCallback();
 			Iterable<Header> kafkaHeaders = createKafkaHeaderWithSchema(TruckSchemaConfig.KAFKA_RAW_TRUCK_GEO_EVENT_SCHEMA_NAME);
 			ProducerRecord<String, String> data = new ProducerRecord<String, String>(this.topicName, null, driverId, eventToPass, kafkaHeaders);
-			//logger.debug("Truck Geo Kafka Record with Header is: " + data);
+			logger.debug("Truck Geo Kafka Record with Header is: " + data);
 			kafkaProducer.send(data, callback);			
 		} catch (Exception e) {
 			logger.error("Error sending csv speed event[" + eventToPass + "] to  Kafka topic["+this.topicName +"]", e);

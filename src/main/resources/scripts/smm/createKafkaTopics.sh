@@ -28,7 +28,7 @@ else
 	--zookeeper $1 \
 	--replication-factor 2 \
 	--partitions 4 \
-	--topic gateway-international-raw-sensors;	
+	--topic gateway-europe-raw-sensors;	
 
 	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
 	--create \
