@@ -64,4 +64,27 @@ else
 	--replication-factor 2 \
 	--partitions 3 \
 	--topic alerts-speeding-drivers;
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic syndicate-oil;	
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic syndicate-battery;
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic syndicate-transmission;
+	
+				
 fi
