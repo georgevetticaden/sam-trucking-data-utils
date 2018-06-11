@@ -27,7 +27,7 @@ else
 	--create \
 	--zookeeper $1 \
 	--replication-factor 2 \
-	--partitions 4 \
+	--partitions 5 \
 	--topic gateway-europe-raw-sensors;	
 
 	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
@@ -86,5 +86,11 @@ else
 	--partitions 3 \
 	--topic syndicate-transmission;
 	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 5 \
+	--topic syndicate-all-geo-critical-events;
 				
 fi

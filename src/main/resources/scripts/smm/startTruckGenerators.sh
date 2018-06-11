@@ -3,6 +3,7 @@
 export JAVA_HOME=$(find /usr/jdk64 -iname 'jdk1.8*' -type d)
 export PATH=$PATH:$JAVA_HOME/bin
 export numOfEuropeTrucks=15
+export numOfCriticalEventProducers=15
 export kafkaBrokers="a-summit11.field.hortonworks.com:6667,a-summit12.field.hortonworks.com:6667,a-summit13.field.hortonworks.com:6667,a-summit14.field.hortonworks.com:6667,a-summit15.field.hortonworks.com:6667"
 
 
@@ -28,6 +29,31 @@ createEuropeTrucks() {
 		NONSECURE \
 		$clientProducerId \
 		gateway-europe-raw-sensors > $logFile &
+	done
+}
+
+createAllGeoCriticalEventProducers() {
+	echo "----------------- Starting Geo Event Critical Producers  ----------------- "
+	for ((i=1;i<=numOfCriticalEventProducers;i++)); do
+	
+		clientProducerId='geo-critical-event-collector-i'$i
+		logFile='geo-critical-event'$i'.out'
+  		echo $clientProducerId
+	
+		nohup java -cp \
+		../../stream-simulator-jar-with-dependencies.jar \
+		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
+		-1 \
+		hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
+		hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
+		1 \
+		/root/workspace/Data-Loader/routes/midwest/ \
+		5000 \
+		$kafkaBrokers \
+		ALL_STREAMS \
+		NONSECURE \
+		$clientProducerId \
+		syndicate-all-geo-critical-events > $logFile &
 	done
 }
 
@@ -262,6 +288,7 @@ nohup java -cp \
 createUSFleet;
 createEuropeTrucks;
 createJavaMicroServiceProducers;
+createAllGeoCriticalEventProducers;
 
 	
 
