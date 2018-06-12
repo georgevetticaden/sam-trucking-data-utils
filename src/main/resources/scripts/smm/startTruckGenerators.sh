@@ -3,7 +3,7 @@
 export JAVA_HOME=$(find /usr/jdk64 -iname 'jdk1.8*' -type d)
 export PATH=$PATH:$JAVA_HOME/bin
 export numOfEuropeTrucks=25
-export numOfCriticalEventProducers=40
+export numOfCriticalEventProducers=30
 export kafkaBrokers="a-summit11.field.hortonworks.com:6667,a-summit12.field.hortonworks.com:6667,a-summit13.field.hortonworks.com:6667,a-summit14.field.hortonworks.com:6667,a-summit15.field.hortonworks.com:6667"
 export SIMULATOR_JAR=stream-simulator-jar-with-dependencies.jar
 
@@ -60,60 +60,38 @@ createAllGeoCriticalEventProducers() {
 }
 
 
-createJavaMicroServiceProducers() {
-	echo "----------------- Creating MicroService producer for Oil  ----------------- "
-	
-	java -cp \
-	$SIMULATOR_JAR \
-	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
-	-1 \
-	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
-	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
-	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
-	7000 \
-	$kafkaBrokers \
-	ALL_STREAMS \
-	NONSECURE \
-	micro-service-oil \
-	syndicate-oil > microservice-oil.out &
-	
-	
-	echo "----------------- Creating MicroService producer for Battery  ----------------- "
-	
- java -cp \
-	$SIMULATOR_JAR \
-	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
-	-1 \
-	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
-	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
-	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
-	10000 \
-	$kafkaBrokers \
-	ALL_STREAMS \
-	NONSECURE \
-	micro-service-battery \
-	syndicate-battery > microservice-battery.out &	
-	
-	echo "----------------- Creating MicroService producer for Transmission  ----------------- "
-	
- java -cp \
-	$SIMULATOR_JAR \
-	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
-	-1 \
-	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
-	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
-	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
-	12000 \
-	$kafkaBrokers \
-	ALL_STREAMS \
-	NONSECURE \
-	micro-service-transmission \
-	syndicate-transmission > microservice-transmission.out &	
+createMicroServiceProducers() {
 
+	echo "----------------- Starting Mirco Service Producers  ----------------- "
+	topics=(route-planning load-optimization fuel-logistics supply-chain predictive-alerts energy-mgmt audit-events compliance adjudication approval syndicate-oil syndicate-battery syndicate-transmission)
+	apps=(route load-optimizer fuel supply-chain predictive energy audit compliance adjudication approval micro-service-oil micro-service-batter micro-service-transmissiony)
+	i=0
+	for topic in "${topics[@]}"
+	do
+    	topicName=$topic
+        clientProducerId=${apps[i]}-apps
+        logFile=$clientProducerId.out;
+		waitTime=$((i*2150));
+		
+		java -cp \
+		$SIMULATOR_JAR \
+		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
+		-1 \
+		hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
+		hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
+		1 \
+		/root/workspace/Data-Loader/routes/midwest/ \
+		$waitTime \
+		$kafkaBrokers \
+		ALL_STREAMS \
+		NONSECURE \
+		$clientProducerId \
+		$topicName > $logFile &        
+        
+        i=$((i+1))
+	done  	
 }
+
 
 createUSFleet() {
 
@@ -289,7 +267,7 @@ echo "----------------- Starting US East Truck Fleet ----------------- "
 
 createUSFleet;
 createEuropeTrucks;
-createJavaMicroServiceProducers;
+createMicroServiceProducers;
 createAllGeoCriticalEventProducers;
 
 	
