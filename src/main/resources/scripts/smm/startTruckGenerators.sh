@@ -5,7 +5,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 export numOfEuropeTrucks=15
 export numOfCriticalEventProducers=15
 export kafkaBrokers="a-summit11.field.hortonworks.com:6667,a-summit12.field.hortonworks.com:6667,a-summit13.field.hortonworks.com:6667,a-summit14.field.hortonworks.com:6667,a-summit15.field.hortonworks.com:6667"
-
+export SIMULATOR_JAR=stream-simulator-jar-with-dependencies.jar
 
 createEuropeTrucks() {
 	echo "----------------- Starting International Fleet  ----------------- "
@@ -16,7 +16,7 @@ createEuropeTrucks() {
   		echo $clientProducerId
 	
 		nohup java -cp \
-		../../stream-simulator-jar-with-dependencies.jar \
+		$SIMULATOR_JAR \
 		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 		-1 \
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -41,7 +41,7 @@ createAllGeoCriticalEventProducers() {
   		echo $clientProducerId
 	
 		nohup java -cp \
-		../../stream-simulator-jar-with-dependencies.jar \
+		$SIMULATOR_JAR \
 		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 		-1 \
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -62,7 +62,7 @@ createJavaMicroServiceProducers() {
 	echo "----------------- Creating MicroService producer for Oil  ----------------- "
 	
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -80,7 +80,7 @@ nohup java -cp \
 	echo "----------------- Creating MicroService producer for Battery  ----------------- "
 	
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -97,7 +97,7 @@ nohup java -cp \
 	echo "----------------- Creating MicroService producer for Transmission  ----------------- "
 	
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -118,7 +118,7 @@ createUSFleet() {
 echo "----------------- Starting US West Truck Fleet ----------------- "
 
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -136,7 +136,7 @@ nohup java -cp \
 	10 > w1.out &
 
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -154,7 +154,7 @@ nohup java -cp \
 	13 > w2.out &
 	
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -173,7 +173,7 @@ nohup java -cp \
 	
 echo "----------------- Starting US Central Truck Fleet ----------------- "	
 	nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -191,7 +191,7 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	11 > c1.out &
 	
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -209,7 +209,7 @@ nohup java -cp \
 	15 > c2.out &
 	
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -229,7 +229,7 @@ nohup java -cp \
 echo "----------------- Starting US East Truck Fleet ----------------- "	
 
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -247,7 +247,7 @@ nohup java -cp \
 	12 > e1.out &	
 	
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -266,7 +266,7 @@ nohup java -cp \
 	
 
 nohup java -cp \
-	../../stream-simulator-jar-with-dependencies.jar \
+	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
