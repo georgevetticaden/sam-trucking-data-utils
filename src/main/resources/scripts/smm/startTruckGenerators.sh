@@ -2,8 +2,8 @@
 
 export JAVA_HOME=$(find /usr/jdk64 -iname 'jdk1.8*' -type d)
 export PATH=$PATH:$JAVA_HOME/bin
-export numOfEuropeTrucks=15
-export numOfCriticalEventProducers=15
+export numOfEuropeTrucks=25
+export numOfCriticalEventProducers=40
 export kafkaBrokers="a-summit11.field.hortonworks.com:6667,a-summit12.field.hortonworks.com:6667,a-summit13.field.hortonworks.com:6667,a-summit14.field.hortonworks.com:6667,a-summit15.field.hortonworks.com:6667"
 export SIMULATOR_JAR=stream-simulator-jar-with-dependencies.jar
 
@@ -14,8 +14,9 @@ createEuropeTrucks() {
 		clientProducerId='minifi-eu-i'$i
 		logFile='eu'$i'.out'
   		echo $clientProducerId
+  		waitTime=$((i*2000));
 	
-		nohup java -cp \
+		java -cp \
 		$SIMULATOR_JAR \
 		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 		-1 \
@@ -23,7 +24,7 @@ createEuropeTrucks() {
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 		1 \
 		/root/workspace/Data-Loader/routes/midwest/ \
-		5000 \
+		$waitTime \
 		$kafkaBrokers \
 		ALL_STREAMS \
 		NONSECURE \
@@ -39,8 +40,9 @@ createAllGeoCriticalEventProducers() {
 		clientProducerId='geo-critical-event-collector-i'$i
 		logFile='geo-critical-event'$i'.out'
   		echo $clientProducerId
-	
-		nohup java -cp \
+		waitTime=$((i*1000));
+		
+		java -cp \
 		$SIMULATOR_JAR \
 		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 		-1 \
@@ -48,7 +50,7 @@ createAllGeoCriticalEventProducers() {
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 		1 \
 		/root/workspace/Data-Loader/routes/midwest/ \
-		5000 \
+		$waitTime \
 		$kafkaBrokers \
 		ALL_STREAMS \
 		NONSECURE \
@@ -61,7 +63,7 @@ createAllGeoCriticalEventProducers() {
 createJavaMicroServiceProducers() {
 	echo "----------------- Creating MicroService producer for Oil  ----------------- "
 	
-nohup java -cp \
+	java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 	-1 \
@@ -69,7 +71,7 @@ nohup java -cp \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	7000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
@@ -79,7 +81,7 @@ nohup java -cp \
 	
 	echo "----------------- Creating MicroService producer for Battery  ----------------- "
 	
-nohup java -cp \
+ java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 	-1 \
@@ -87,7 +89,7 @@ nohup java -cp \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	10000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
@@ -96,7 +98,7 @@ nohup java -cp \
 	
 	echo "----------------- Creating MicroService producer for Transmission  ----------------- "
 	
-nohup java -cp \
+ java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 	-1 \
@@ -104,7 +106,7 @@ nohup java -cp \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	12000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
@@ -117,7 +119,7 @@ createUSFleet() {
 
 echo "----------------- Starting US West Truck Fleet ----------------- "
 
-nohup java -cp \
+ java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -135,7 +137,7 @@ nohup java -cp \
 	"Saint Louis to Tulsa" \
 	10 > w1.out &
 
-nohup java -cp \
+ java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -143,7 +145,7 @@ nohup java -cp \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	6000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
@@ -153,7 +155,7 @@ nohup java -cp \
 	"Des Moines to Chicago" \
 	13 > w2.out &
 	
-nohup java -cp \
+ java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -161,7 +163,7 @@ nohup java -cp \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	7000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
@@ -172,7 +174,7 @@ nohup java -cp \
 	14 > w3.out &
 	
 echo "----------------- Starting US Central Truck Fleet ----------------- "	
-	nohup java -cp \
+	 java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -180,7 +182,7 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	8000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
@@ -190,7 +192,7 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	"Saint Louis to Chicago" \
 	11 > c1.out &
 	
-nohup java -cp \
+ java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -198,7 +200,7 @@ nohup java -cp \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	9000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
@@ -208,7 +210,7 @@ nohup java -cp \
 	"Memphis to Little Rock" \
 	15 > c2.out &
 	
-nohup java -cp \
+ java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -216,7 +218,7 @@ nohup java -cp \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	10000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
@@ -228,7 +230,7 @@ nohup java -cp \
 	
 echo "----------------- Starting US East Truck Fleet ----------------- "	
 
-nohup java -cp \
+ java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -236,7 +238,7 @@ nohup java -cp \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	11000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
@@ -246,7 +248,7 @@ nohup java -cp \
 	"Saint Louis to Memphis" \
 	12 > e1.out &	
 	
-nohup java -cp \
+ java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -254,7 +256,7 @@ nohup java -cp \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	12000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \
@@ -265,7 +267,7 @@ nohup java -cp \
 	17 > e2.out &
 	
 
-nohup java -cp \
+ java -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -273,7 +275,7 @@ nohup java -cp \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
 	/root/workspace/Data-Loader/routes/midwest/ \
-	5000 \
+	13000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
 	NONSECURE \

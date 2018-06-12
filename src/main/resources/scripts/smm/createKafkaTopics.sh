@@ -92,5 +92,83 @@ else
 	--replication-factor 2 \
 	--partitions 5 \
 	--topic syndicate-all-geo-critical-events;
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic fleet-supply-chain;	
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic route-planning ;	
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic load-optimization ;		
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic fuel-logistics ;
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic supply-chain ;	
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic predictive-alerts ;
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic energy-mgmt ;	
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic audit-events ;		
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic compliance ;
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic adjudication ;
+	
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic approval ;	
+		
 				
 fi
