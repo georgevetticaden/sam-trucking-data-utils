@@ -11,4 +11,10 @@ else
 	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper $1 --topic syndicate-geo-event-json --delete ;
 	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper $1 --topic syndicate-speed-event-json --delete ;
 	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper $1 --topic alerts-speeding-drivers --delete ;
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper $1 --topic syndicate-all-geo-critical-events --delete ;
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper $1 --topic syndicate-battery --delete ;
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper $1 --topic syndicate-oil --delete ;
+	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper $1 --topic syndicate-transmission --delete ;
+	
+	
 fi
