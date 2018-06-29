@@ -2,10 +2,14 @@
 
 export JAVA_HOME=$(find /usr/jdk64 -iname 'jdk1.8*' -type d)
 export PATH=$PATH:$JAVA_HOME/bin
+export SIMULATOR_JAR=stream-simulator-jar-with-dependencies.jar
+
+export kafkaBrokers="a-dps-connected-dp11.field.hortonworks.com:6667,a-dps-connected-dp12.field.hortonworks.com:6667,a-dps-connected-dp13.field.hortonworks.com:6667,a-dps-connected-dp14.field.hortonworks.com:6667,a-dps-connected-dp15.field.hortonworks.com:6667"
+export SECURE_MODE=SECURE 
+export JAAS_CONFIG=" -Djava.security.auth.login.config=simulator_jaas.conf "
 export numOfEuropeTrucks=25
 export numOfCriticalEventProducers=30
-export kafkaBrokers="a-summit11.field.hortonworks.com:6667,a-summit12.field.hortonworks.com:6667,a-summit13.field.hortonworks.com:6667,a-summit14.field.hortonworks.com:6667,a-summit15.field.hortonworks.com:6667"
-export SIMULATOR_JAR=stream-simulator-jar-with-dependencies.jar
+
 
 createEuropeTrucks() {
 	echo "----------------- Starting International Fleet  ----------------- "
@@ -16,7 +20,7 @@ createEuropeTrucks() {
   		echo $clientProducerId
   		waitTime=$((i*2000));
 	
-		java -cp \
+		java  $JAAS_CONFIG -cp \
 		$SIMULATOR_JAR \
 		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 		-1 \
@@ -27,7 +31,7 @@ createEuropeTrucks() {
 		$waitTime \
 		$kafkaBrokers \
 		ALL_STREAMS \
-		NONSECURE \
+		$SECURE_MODE \
 		$clientProducerId \
 		gateway-europe-raw-sensors > $logFile &
 	done
@@ -42,7 +46,7 @@ createAllGeoCriticalEventProducers() {
   		echo $clientProducerId
 		waitTime=$((i*1000));
 		
-		java -cp \
+		java  $JAAS_CONFIG -cp \
 		$SIMULATOR_JAR \
 		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 		-1 \
@@ -53,7 +57,7 @@ createAllGeoCriticalEventProducers() {
 		$waitTime \
 		$kafkaBrokers \
 		ALL_STREAMS \
-		NONSECURE \
+		$SECURE_MODE \
 		$clientProducerId \
 		syndicate-all-geo-critical-events > $logFile &
 	done
@@ -73,7 +77,7 @@ createMicroServiceProducers() {
         logFile=$clientProducerId.out;
 		waitTime=$((i*2150));
 		
-		java -cp \
+		java  $JAAS_CONFIG -cp \
 		$SIMULATOR_JAR \
 		hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerTruckFleetApp \
 		-1 \
@@ -84,7 +88,7 @@ createMicroServiceProducers() {
 		$waitTime \
 		$kafkaBrokers \
 		ALL_STREAMS \
-		NONSECURE \
+		$SECURE_MODE \
 		$clientProducerId \
 		$topicName > $logFile &        
         
@@ -97,7 +101,7 @@ createUSFleet() {
 
 echo "----------------- Starting US West Truck Fleet ----------------- "
 
- java -cp \
+ java  $JAAS_CONFIG -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -108,14 +112,14 @@ echo "----------------- Starting US West Truck Fleet ----------------- "
 	5000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
-	NONSECURE \
+	$SECURE_MODE \
 	minifi-truck-w1 \
 	gateway-west-raw-sensors \
 	10 \
 	"Saint Louis to Tulsa" \
 	10 > w1.out &
 
- java -cp \
+ java  $JAAS_CONFIG -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -126,14 +130,14 @@ echo "----------------- Starting US West Truck Fleet ----------------- "
 	6000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
-	NONSECURE \
+	$SECURE_MODE \
 	minifi-truck-w2 \
 	gateway-west-raw-sensors \
 	13 \
 	"Des Moines to Chicago" \
 	13 > w2.out &
 	
- java -cp \
+ java  $JAAS_CONFIG -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -144,7 +148,7 @@ echo "----------------- Starting US West Truck Fleet ----------------- "
 	7000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
-	NONSECURE \
+	$SECURE_MODE \
 	minifi-truck-w3 \
 	gateway-west-raw-sensors \
 	14 \
@@ -152,7 +156,7 @@ echo "----------------- Starting US West Truck Fleet ----------------- "
 	14 > w3.out &
 	
 echo "----------------- Starting US Central Truck Fleet ----------------- "	
-	 java -cp \
+	 java  $JAAS_CONFIG -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -163,14 +167,14 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	8000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
-	NONSECURE \
+	$SECURE_MODE \
 	minifi-truck-c1 \
 	gateway-central-raw-sensors \
 	11 \
 	"Saint Louis to Chicago" \
 	11 > c1.out &
 	
- java -cp \
+ java  $JAAS_CONFIG -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -181,14 +185,14 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	9000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
-	NONSECURE \
+	$SECURE_MODE \
 	minifi-truck-c2 \
 	gateway-central-raw-sensors \
 	15 \
 	"Memphis to Little Rock" \
 	15 > c2.out &
 	
- java -cp \
+ java  $JAAS_CONFIG -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -199,7 +203,7 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	10000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
-	NONSECURE \
+	$SECURE_MODE \
 	minifi-truck-c3 \
 	gateway-central-raw-sensors \
 	16 \
@@ -208,7 +212,7 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	
 echo "----------------- Starting US East Truck Fleet ----------------- "	
 
- java -cp \
+ java  $JAAS_CONFIG -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -219,14 +223,14 @@ echo "----------------- Starting US East Truck Fleet ----------------- "
 	11000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
-	NONSECURE \
+	$SECURE_MODE \
 	minifi-truck-e1 \
 	gateway-east-raw-sensors \
 	12 \
 	"Saint Louis to Memphis" \
 	12 > e1.out &	
 	
- java -cp \
+ java  $JAAS_CONFIG -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -237,7 +241,7 @@ echo "----------------- Starting US East Truck Fleet ----------------- "
 	12000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
-	NONSECURE \
+	$SECURE_MODE \
 	minifi-truck-e2 \
 	gateway-east-raw-sensors \
 	17 \
@@ -245,7 +249,7 @@ echo "----------------- Starting US East Truck Fleet ----------------- "
 	17 > e2.out &
 	
 
- java -cp \
+ java  $JAAS_CONFIG -cp \
 	$SIMULATOR_JAR \
 	hortonworks.hdf.sam.refapp.trucking.simulator.app.smm.SMMSimulationRunnerSingleDriverApp \
 	-1 \
@@ -256,7 +260,7 @@ echo "----------------- Starting US East Truck Fleet ----------------- "
 	13000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
-	NONSECURE \
+	$SECURE_MODE \
 	minifi-truck-e3 \
 	gateway-east-raw-sensors \
 	18 \
