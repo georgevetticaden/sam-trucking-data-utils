@@ -6,7 +6,7 @@ export SIMULATOR_JAR=stream-simulator-jar-with-dependencies.jar
 
 export kafkaBrokers="a-dps-connected-dp11.field.hortonworks.com:6667,a-dps-connected-dp12.field.hortonworks.com:6667,a-dps-connected-dp13.field.hortonworks.com:6667,a-dps-connected-dp14.field.hortonworks.com:6667,a-dps-connected-dp15.field.hortonworks.com:6667"
 export SECURE_MODE=SECURE 
-export JAAS_CONFIG=" -Djava.security.auth.login.config=simulator_jaas.conf "
+export JAAS_CONFIG=" -Djava.security.auth.login.config=dev_producer_jaas.conf "
 export numOfEuropeTrucks=25
 export numOfCriticalEventProducers=30
 
