@@ -1,15 +1,18 @@
 #!/bin/bash
 
-export JAVA_HOME=$(find /usr/jdk64 -iname 'jdk1.8*' -type d)
-export PATH=$PATH:$JAVA_HOME/bin
+# export JAVA_HOME=$(find /usr/jdk64 -iname 'jdk1.8*' -type d)
+# export PATH=$PATH:$JAVA_HOME/bin
 export SIMULATOR_JAR=stream-simulator-jar-with-dependencies.jar
 
-export kafkaBrokers="a-dps-connected-dp11.field.hortonworks.com:6667,a-dps-connected-dp12.field.hortonworks.com:6667,a-dps-connected-dp13.field.hortonworks.com:6667,a-dps-connected-dp14.field.hortonworks.com:6667,a-dps-connected-dp15.field.hortonworks.com:6667"
+
+export kafkaBrokers="c-dps-connected-dp11.field.hortonworks.com:6667,c-dps-connected-dp12.field.hortonworks.com:6667,c-dps-connected-dp13.field.hortonworks.com:6667,c-dps-connected-dp14.field.hortonworks.com:6667,c-dps-connected-dp15.field.hortonworks.com:6667"
+
 export SECURE_MODE=SECURE 
 export JAAS_CONFIG=" -Djava.security.auth.login.config=dev_producer_jaas.conf "
 export numOfEuropeTrucks=25
 export numOfCriticalEventProducers=30
 
+export ROUTES_LOCATION=/root/workspace/Data-Loader/routes/midwest
 
 createEuropeTrucks() {
 	echo "----------------- Starting International Fleet  ----------------- "
@@ -27,7 +30,7 @@ createEuropeTrucks() {
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 		1 \
-		/root/workspace/Data-Loader/routes/midwest/ \
+		$ROUTES_LOCATION \
 		$waitTime \
 		$kafkaBrokers \
 		ALL_STREAMS \
@@ -53,7 +56,7 @@ createAllGeoCriticalEventProducers() {
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 		1 \
-		/root/workspace/Data-Loader/routes/midwest/ \
+		$ROUTES_LOCATION \
 		$waitTime \
 		$kafkaBrokers \
 		ALL_STREAMS \
@@ -84,7 +87,7 @@ createMicroServiceProducers() {
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 		hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 		1 \
-		/root/workspace/Data-Loader/routes/midwest/ \
+		$ROUTES_LOCATION \
 		$waitTime \
 		$kafkaBrokers \
 		ALL_STREAMS \
@@ -108,7 +111,7 @@ echo "----------------- Starting US West Truck Fleet ----------------- "
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
+	$ROUTES_LOCATION \
 	5000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
@@ -126,7 +129,7 @@ echo "----------------- Starting US West Truck Fleet ----------------- "
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
+	$ROUTES_LOCATION \
 	6000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
@@ -144,7 +147,7 @@ echo "----------------- Starting US West Truck Fleet ----------------- "
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
+	$ROUTES_LOCATION \
 	7000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
@@ -163,7 +166,7 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
+	$ROUTES_LOCATION \
 	8000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
@@ -181,7 +184,7 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
+	$ROUTES_LOCATION \
 	9000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
@@ -199,7 +202,7 @@ echo "----------------- Starting US Central Truck Fleet ----------------- "
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
+	$ROUTES_LOCATION \
 	10000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
@@ -219,7 +222,7 @@ echo "----------------- Starting US East Truck Fleet ----------------- "
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
+	$ROUTES_LOCATION \
 	11000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
@@ -237,7 +240,7 @@ echo "----------------- Starting US East Truck Fleet ----------------- "
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
+	$ROUTES_LOCATION \
 	12000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
@@ -256,7 +259,7 @@ echo "----------------- Starting US East Truck Fleet ----------------- "
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.domain.transport.Truck \
 	hortonworks.hdf.sam.refapp.trucking.simulator.impl.collectors.smm.kafka.SMMTruckEventCSVGenerator \
 	1 \
-	/root/workspace/Data-Loader/routes/midwest/ \
+	$ROUTES_LOCATION \
 	13000 \
 	$kafkaBrokers \
 	ALL_STREAMS \
