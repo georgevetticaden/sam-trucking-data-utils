@@ -6,28 +6,28 @@ else
 	--create \
 	--zookeeper $1 \
 	--replication-factor 2 \
-	--partitions 4 \
+	--partitions 3 \
 	--topic gateway-west-raw-sensors;
 
 	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
 	--create \
 	--zookeeper $1 \
 	--replication-factor 2 \
-	--partitions 4 \
+	--partitions 3 \
 	--topic gateway-central-raw-sensors;
 
 	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
 	--create \
 	--zookeeper $1 \
 	--replication-factor 2 \
-	--partitions 4 \
+	--partitions 3 \
 	--topic gateway-east-raw-sensors;
 	
 	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
 	--create \
 	--zookeeper $1 \
 	--replication-factor 2 \
-	--partitions 5 \
+	--partitions 3 \
 	--topic gateway-europe-raw-sensors;	
 
 	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
@@ -90,7 +90,7 @@ else
 	--create \
 	--zookeeper $1 \
 	--replication-factor 2 \
-	--partitions 5 \
+	--partitions 3 \
 	--topic syndicate-all-geo-critical-events;
 	
 	/usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
