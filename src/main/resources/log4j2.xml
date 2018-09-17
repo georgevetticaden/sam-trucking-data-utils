@@ -15,8 +15,7 @@
     </Logger>
     
     <Logger name="hortonworks.hdf.sam.refapp.trucking.simulator.schemaregistry" level="debug">
-                  
-    
+
     	<AppenderRef ref="CONSOLE"/>
       	<AppenderRef ref="ROLLING"/>
     </Logger>
