@@ -1,7 +1,7 @@
 {
    "type" : "record",
-   "namespace" : "hortonworks.hdp.refapp.trucking",
-   "name" : "truckspeedevent",
+   "namespace" : "hortonworks.hdf.schema.refapp.trucking",
+   "name" : "TruckSpeedEvent",
    "fields" : [
       { "name" : "eventTime" , "type" : "string" },
       { "name" : "eventTimeLong" , "type" : "long", "default": 0 },
