@@ -26,9 +26,9 @@ public class DriverStaticList {
 		DRIVER_LIST.add(new Driver(lastDriverId++, "Joe Witt", 30, true));
 		DRIVER_LIST.add(new Driver(lastDriverId++, "Suresh Srinivas", 20, true));
 		/* End of speedy drivers */
-		DRIVER_LIST.add(new Driver(lastDriverId++, "Paul Codding", 100));
-		DRIVER_LIST.add(new Driver(lastDriverId++, "Joe Niemiec", 100));
-		DRIVER_LIST.add(new Driver(lastDriverId++, "Adis Cesir", 100));
+		DRIVER_LIST.add(new Driver(lastDriverId++, "Paul Codding", 20));
+		DRIVER_LIST.add(new Driver(lastDriverId++, "Joe Niemiec", 20));
+		DRIVER_LIST.add(new Driver(lastDriverId++, "Adis Cesir", 10));
 		DRIVER_LIST.add(new Driver(lastDriverId++, "Rohit Bakshi", 100));
 		DRIVER_LIST.add(new Driver(lastDriverId++, "Tom McCuch", 100));
 		DRIVER_LIST.add(new Driver(lastDriverId++, "Eric Mizell", 100));
