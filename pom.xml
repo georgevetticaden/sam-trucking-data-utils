@@ -7,7 +7,7 @@
   	
   	
 	<properties>
-		<schema.registry.version>0.5.4.3.3.0.0-123</schema.registry.version>
+		<schema.registry.version>0.5.4.3.3.0.0-165</schema.registry.version>
 		<kite.version>1.0.0</kite.version>
        <jersey.version>2.22.1</jersey.version>
         <jersey-media-multipart.version>2.22.1</jersey-media-multipart.version>	
@@ -16,13 +16,19 @@
         <aws.kinesis.version>1.8.7</aws.kinesis.version>
         <junit.version>4.5</junit.version>
         <log4j2.version>2.6.2</log4j2.version>
-        <kafka.version>2.0.0.3.3.0.0-111</kafka.version>
+        <kafka.version>2.0.0.3.0.3.0-231</kafka.version>
 		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
 		<org.springframework.spring.context.support>3.2.5.RELEASE</org.springframework.spring.context.support>	        
 	</properties>
 	
 	
 	<dependencies>
+	
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0.1</version>
+		</dependency>	
 		
 		<dependency>
 		    <groupId>org.slf4j</groupId>
@@ -189,10 +195,10 @@
 		<dependency>
 	            <groupId>com.hortonworks.registries</groupId>
 	            <artifactId>registry-common</artifactId>
-	            <version>${schema.registry.version}</version>	
+	            <version>${schema.registry.version}</version>
 		</dependency>			
 		
-		
+
 		
 		
         <dependency>
