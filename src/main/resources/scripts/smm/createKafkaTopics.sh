@@ -183,13 +183,6 @@ else
     --replication-factor 2 \
     --partitions 3 \
     --topic driver-average-speed;
-    
-    /usr/hdp/current/kafka-broker/bin/kafka-topics.sh \
-    --create \
-    --zookeeper $1\
-    --replication-factor 2 \
-    --partitions 3 \
-    --topic alerts-speeding-drivers;    
-		
+       	
 				
 fi
