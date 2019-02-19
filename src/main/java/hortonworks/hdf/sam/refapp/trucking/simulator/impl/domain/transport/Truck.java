@@ -205,6 +205,7 @@ public class Truck extends AbstractEventEmitter{
 	public int getTruckId() {
 		return truckId;
 	}
+
 	
 	
 }

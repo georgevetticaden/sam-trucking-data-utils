@@ -113,9 +113,12 @@ public class TruckConfiguration {
 	public static Driver getDriverAndRoute(int driverId, int routeId, String routeName) {
 		Driver driver =  DriverStaticList.getDriver(driverId);
 		
+		//This hack was added on 1/18/19 for minifi agent automatic script workaroudn.
+		String correctRouteName = replaceRouteName(routeName);
+		
 		//if driver has route, then it must be the risky drivers, so don't provide new route..
 		if(driver.getRoute() == null) {
-			Route route = getRoute(routeName);
+			Route route = getRoute(correctRouteName);
 			if(route.getRouteId() == -1) {
 				((RouteProvided)route).setRouteId(routeId);
 			}
@@ -127,5 +130,12 @@ public class TruckConfiguration {
 		return driver;		
 	}
 
+	private static String replaceRouteName(String route) {
+		if(route.contains("__")) {
+			return route.replace("__", " ");
+		} else {
+			return route;
+		}
+	}		
 
 }

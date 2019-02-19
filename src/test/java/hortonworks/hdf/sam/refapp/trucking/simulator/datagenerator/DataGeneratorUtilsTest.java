@@ -31,4 +31,18 @@ public class DataGeneratorUtilsTest {
 		double  value = 90.52345;
 		System.out.println(Math.round(value));
 	}
+	
+	@Test
+	public void replaceRouteName() {
+		String route = "Joplin to Kansas City";
+		System.out.println(replaceRouteName(route));
+	}
+	
+	public String replaceRouteName(String route) {
+		if(route.contains("__")) {
+			return route.replace("__", " ");
+		} else {
+			return route;
+		}
+	}
 }
