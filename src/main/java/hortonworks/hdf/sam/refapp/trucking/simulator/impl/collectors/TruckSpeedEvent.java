@@ -14,6 +14,16 @@ public class TruckSpeedEvent implements Serializable {
 	private Integer routeId;
 	private String route;
 	private Integer speed;
+	
+	private String edgeAgentIdentifier;
+	
+	
+	public String getEdgeAgentIdentifier() {
+		return edgeAgentIdentifier;
+	}
+	public void setEdgeAgentIdentifier(String edgeAgentIdentifier) {
+		this.edgeAgentIdentifier = edgeAgentIdentifier;
+	}
 	public String getEventTime() {
 		return eventTime;
 	}
@@ -68,7 +78,7 @@ public class TruckSpeedEvent implements Serializable {
 	public void setEventTimeLong(Long eventTimeLong) {
 		this.eventTimeLong = eventTimeLong;
 	}
-	
+
 	
 	
 }

@@ -22,6 +22,8 @@ public class TruckGeoEvent implements Serializable {
 	private Double latitude;
 	private Long correlationId;
 	
+	private String edgeAgentIdentifier;
+	
 	public String getEventTime() {
 		return eventTime;
 	}
@@ -94,6 +96,12 @@ public class TruckGeoEvent implements Serializable {
 	}
 	public void setCorrelationId(Long correlationId) {
 		this.correlationId = correlationId;
+	}
+	public String getEdgeAgentIdentifier() {
+		return edgeAgentIdentifier;
+	}
+	public void setEdgeAgentIdentifier(String edgeAgentIdentifier) {
+		this.edgeAgentIdentifier = edgeAgentIdentifier;
 	}
 	
 	
