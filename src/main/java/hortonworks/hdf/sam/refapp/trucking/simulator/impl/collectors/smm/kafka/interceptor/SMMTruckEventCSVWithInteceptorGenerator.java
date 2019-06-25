@@ -48,7 +48,7 @@ public class SMMTruckEventCSVWithInteceptorGenerator extends BaseTruckEventColle
         props.put(CommonClientConfigs.CLIENT_ID_CONFIG, producerName);
         
         /* Configure the end to end latency producer interceptors */
-       // props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "com.hortonworks.smm.kafka.monitoring.interceptors.MonitoringProducerInterceptor");
+        props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "com.hortonworks.smm.kafka.monitoring.interceptors.MonitoringProducerInterceptor");
         
         System.out.println("Producer Name is: " + producerName);
         System.out.println("Topic name is" + topicName);
