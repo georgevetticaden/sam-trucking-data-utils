@@ -197,6 +197,91 @@ else
     --replication-factor 2 \
     --partitions 3 \
     --topic gateway-speed-raw-sensor;      
+    
+       /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic gateway-freightliner-sensors;
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic gateway-tata-sensors;
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic gateway-mack-sensors;
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic gateway-benz-sensors;
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-tata-speed;
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-tata-geo;
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-mack-speed;
+        
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-mack-geo;
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-freightliner-speed;
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-freightliner-geo;
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-benz-speed;
+
+        /usr/hdf/current/kafka-broker/bin/kafka-topics.sh \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-benz-geo;
        	
 				
 fi
