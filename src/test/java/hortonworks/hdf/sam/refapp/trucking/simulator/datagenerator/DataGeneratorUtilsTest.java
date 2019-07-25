@@ -2,6 +2,8 @@ package hortonworks.hdf.sam.refapp.trucking.simulator.datagenerator;
 
 import hortonworks.hdf.sam.refapp.trucking.simulator.datagenerator.DataGeneratorUtils;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +32,14 @@ public class DataGeneratorUtilsTest {
 	public void roundUp() {
 		double  value = 90.52345;
 		System.out.println(Math.round(value));
+	}
+	
+	@Test
+	public void dateTest() {
+		
+		long dateLong = 1564034944422L;
+		Timestamp timestamp = new Timestamp(dateLong);
+		System.out.println(timestamp);
 	}
 	
 	@Test
